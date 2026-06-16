@@ -106,8 +106,67 @@ def load_js():
         pass
 
 
+def fix_file_summary_title_color():
+    # Khusus memperbaiki warna judul "File Summary" saja.
+    # Tidak mengubah layout, ukuran card, halaman lain, atau logic aplikasi.
+    st.markdown(
+        """
+        <style>
+            /* Target heading markdown Streamlit untuk File Summary */
+            section.main div[data-testid="stMarkdownContainer"] h1[id="file-summary"],
+            section.main div[data-testid="stMarkdownContainer"] h2[id="file-summary"],
+            section.main div[data-testid="stMarkdownContainer"] h3[id="file-summary"],
+            section.main div[data-testid="stMarkdownContainer"] h4[id="file-summary"],
+            section.main div[data-testid="stMarkdownContainer"] h1:has(a[href="#file-summary"]),
+            section.main div[data-testid="stMarkdownContainer"] h2:has(a[href="#file-summary"]),
+            section.main div[data-testid="stMarkdownContainer"] h3:has(a[href="#file-summary"]),
+            section.main div[data-testid="stMarkdownContainer"] h4:has(a[href="#file-summary"]) {
+                color: #FFFFFF !important;
+                -webkit-text-fill-color: #FFFFFF !important;
+                opacity: 1 !important;
+                filter: none !important;
+                font-weight: 1000 !important;
+                text-shadow: 0 0 14px rgba(103, 232, 249, 0.30) !important;
+            }
+
+            /* Isi teks di dalam heading File Summary */
+            section.main div[data-testid="stMarkdownContainer"] h1[id="file-summary"] *,
+            section.main div[data-testid="stMarkdownContainer"] h2[id="file-summary"] *,
+            section.main div[data-testid="stMarkdownContainer"] h3[id="file-summary"] *,
+            section.main div[data-testid="stMarkdownContainer"] h4[id="file-summary"] *,
+            section.main div[data-testid="stMarkdownContainer"] h1:has(a[href="#file-summary"]) *,
+            section.main div[data-testid="stMarkdownContainer"] h2:has(a[href="#file-summary"]) *,
+            section.main div[data-testid="stMarkdownContainer"] h3:has(a[href="#file-summary"]) *,
+            section.main div[data-testid="stMarkdownContainer"] h4:has(a[href="#file-summary"]) * {
+                color: #FFFFFF !important;
+                -webkit-text-fill-color: #FFFFFF !important;
+                opacity: 1 !important;
+                filter: none !important;
+            }
+
+            /* Icon link kecil di samping File Summary tetap abu agar tidak mengganggu */
+            section.main div[data-testid="stMarkdownContainer"] h1[id="file-summary"] a,
+            section.main div[data-testid="stMarkdownContainer"] h2[id="file-summary"] a,
+            section.main div[data-testid="stMarkdownContainer"] h3[id="file-summary"] a,
+            section.main div[data-testid="stMarkdownContainer"] h4[id="file-summary"] a,
+            section.main div[data-testid="stMarkdownContainer"] h1:has(a[href="#file-summary"]) a,
+            section.main div[data-testid="stMarkdownContainer"] h2:has(a[href="#file-summary"]) a,
+            section.main div[data-testid="stMarkdownContainer"] h3:has(a[href="#file-summary"]) a,
+            section.main div[data-testid="stMarkdownContainer"] h4:has(a[href="#file-summary"]) a {
+                color: #94A3B8 !important;
+                -webkit-text-fill-color: #94A3B8 !important;
+                opacity: 0.85 !important;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+
 load_css()
 load_js()
+fix_file_summary_title_color()
 
 
 
