@@ -1164,6 +1164,100 @@ def inject_bi_dashboard_css():
                     color: #64748b;
                 }
             }
+
+            /* =====================================================
+               FEATURE MENU UNDER KPI FINAL
+               Menu utama dikembalikan tepat di bawah KPI Rows/Columns,
+               bukan di bagian bawah halaman.
+               ===================================================== */
+
+            .inv-feature-menu-box {
+                width: 100% !important;
+                margin: 0 0 12px 0 !important;
+                padding: 12px 14px 13px 14px !important;
+                border-radius: 18px !important;
+                border: 1px solid rgba(125, 211, 252, .25) !important;
+                background:
+                    radial-gradient(circle at 2% 0%, rgba(34, 211, 238, .14), transparent 24%),
+                    linear-gradient(135deg, rgba(15,23,42,.96), rgba(30,41,59,.94)) !important;
+                box-shadow: 0 14px 32px rgba(0,0,0,.18) !important;
+                box-sizing: border-box !important;
+            }
+
+            .inv-feature-head {
+                display: block !important;
+                margin-bottom: 10px !important;
+            }
+
+            .inv-feature-title {
+                color: #67e8f9 !important;
+                font-size: 15px !important;
+                font-weight: 1000 !important;
+                letter-spacing: .06em !important;
+                text-transform: uppercase !important;
+                line-height: 1.2 !important;
+            }
+
+            .inv-feature-sub {
+                color: #dbeafe !important;
+                font-size: 11.5px !important;
+                font-weight: 750 !important;
+                line-height: 1.3 !important;
+                margin-top: 3px !important;
+            }
+
+            .inv-feature-badge {
+                color: #86efac !important;
+                font-size: 10.5px !important;
+                font-weight: 1000 !important;
+                letter-spacing: .06em !important;
+                text-transform: uppercase !important;
+                border: 1px solid rgba(134,239,172,.28) !important;
+                background: rgba(22, 163, 74, .12) !important;
+                border-radius: 999px !important;
+                padding: 6px 10px !important;
+                white-space: nowrap !important;
+            }
+
+            .inv-feature-menu-box div[data-testid="stHorizontalBlock"] {
+                gap: 0.55rem !important;
+                margin-bottom: 0.45rem !important;
+            }
+
+            .inv-feature-menu-box div[data-testid="stButton"] > button {
+                min-height: 54px !important;
+                height: 54px !important;
+                padding: 8px 9px !important;
+                border-radius: 15px !important;
+                color: #EAF6FF !important;
+                font-size: 12px !important;
+                font-weight: 900 !important;
+                line-height: 1.18 !important;
+                background:
+                    linear-gradient(135deg, rgba(8,145,178,.22), rgba(88,28,135,.22)) !important;
+                border: 1px solid rgba(34,211,238,.30) !important;
+                box-shadow: 0 10px 22px rgba(0,0,0,.12) !important;
+            }
+
+            .inv-feature-menu-box div[data-testid="stButton"] > button:hover {
+                transform: translateY(-2px) !important;
+                border-color: rgba(34,211,238,.62) !important;
+                box-shadow: 0 0 24px rgba(34,211,238,.16) !important;
+                color: #67e8f9 !important;
+            }
+
+            /* Best Practices lama disembunyikan agar menu tidak muncul di bawah halaman */
+            .inv-best {
+                display: none !important;
+            }
+
+
+            /* FEATURE MENU CLEAN HEADER FINAL */
+            .inv-feature-sub,
+            .inv-feature-badge {
+                display: none !important;
+            }
+
         </style>
         """,
         unsafe_allow_html=True
@@ -1573,6 +1667,66 @@ def render_main_feature_menu():
             dashboard_go_to("Time Series Analytics")
 
 
+
+def render_inventory_feature_menu():
+    st.markdown(
+        """
+        <div class="inv-feature-menu-box">
+            <div class="inv-feature-head">
+                <div>
+                    <div class="inv-feature-title">🚀 Feature Menu</div>
+                </div>
+            </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    f1, f2, f3, f4, f5 = st.columns(5, gap="small")
+
+    with f1:
+        if st.button("📁 Upload Data", use_container_width=True, key="inv_menu_upload_data"):
+            dashboard_go_to("Upload Data")
+
+    with f2:
+        if st.button("📌 Dataset Info", use_container_width=True, key="inv_menu_dataset_info"):
+            dashboard_go_to("Dataset Information")
+
+    with f3:
+        if st.button("🧹 Data Cleaning", use_container_width=True, key="inv_menu_data_cleaning"):
+            dashboard_go_to("Data Cleaning")
+
+    with f4:
+        if st.button("📊 Statistics", use_container_width=True, key="inv_menu_statistics"):
+            dashboard_go_to("Numerical Variables")
+
+    with f5:
+        if st.button("📈 Visualization", use_container_width=True, key="inv_menu_visualization"):
+            dashboard_go_to("Numerical Visualization")
+
+    g1, g2, g3, g4, g5 = st.columns(5, gap="small")
+
+    with g1:
+        if st.button("🔗 Bivariate", use_container_width=True, key="inv_menu_bivariate"):
+            dashboard_go_to("Bivariate & Multivariate Analysis")
+
+    with g2:
+        if st.button("📌 Cat vs Num", use_container_width=True, key="inv_menu_cat_num"):
+            dashboard_go_to("Categorical vs Numerical Analysis")
+
+    with g3:
+        if st.button("⏱️ Time Series", use_container_width=True, key="inv_menu_time_series"):
+            dashboard_go_to("Time Series Analytics")
+
+    with g4:
+        if st.button("🧠 Insight", use_container_width=True, key="inv_menu_insight"):
+            dashboard_go_to("Intelligent Insight Generator")
+
+    with g5:
+        if st.button("📄 Reporting", use_container_width=True, key="inv_menu_reporting"):
+            dashboard_go_to("Download Report PDF")
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
 def render_quick_actions():
     st.markdown('<div class="bi-action-title">Quick Actions</div>', unsafe_allow_html=True)
 
@@ -1789,6 +1943,8 @@ def show_dashboard_page(
     )
     st.markdown(kpi_html, unsafe_allow_html=True)
 
+    render_inventory_feature_menu()
+
     main_area, side_area = st.columns([4.35, 1.05], gap="small")
 
     with main_area:
@@ -1932,16 +2088,4 @@ def show_dashboard_page(
             unsafe_allow_html=True
         )
 
-    st.markdown(
-        """
-        <div class="inv-best">
-            <div class="inv-best-title">Best<br>Practices</div>
-            <div class="inv-best-item"><span class="inv-best-icon">🧾</span>Pastikan dataset bersih dan kolom mudah dipahami.</div>
-            <div class="inv-best-item"><span class="inv-best-icon">📅</span>Update dataset secara berkala sebelum presentasi.</div>
-            <div class="inv-best-item"><span class="inv-best-icon">🔎</span>Gunakan data cleaning untuk missing dan duplicate.</div>
-            <div class="inv-best-item"><span class="inv-best-icon">📊</span>Cek visualisasi untuk memahami pola data.</div>
-            <div class="inv-best-item"><span class="inv-best-icon">📤</span>Export report sebagai bukti hasil analisis.</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    # Best Practices lama dihapus karena menu utama sudah dipindahkan ke bawah KPI.
