@@ -2999,3 +2999,493 @@ section.main p[style*="color"] {
     color: #EAF6FF !important;
     opacity: 1 !important;
 }
+
+/* =========================================================
+   FINAL HARD FIX V2 — TEXT READABILITY ONLY
+   Catatan penting:
+   - Ini hanya mengubah WARNA/OPACITY tulisan.
+   - Tidak mengubah layout, ukuran card, jarak, sidebar, atau tombol.
+   - Dibuat lebih kuat dari patch sebelumnya karena beberapa CSS halaman
+     ditulis langsung dari Python/app.py.
+========================================================= */
+
+/* ---------- GLOBAL DARK PAGE READABILITY ---------- */
+html body .stApp,
+html body .stApp p,
+html body .stApp span,
+html body .stApp div,
+html body .stApp li,
+html body .stApp label,
+html body .stApp small {
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+/* ---------- UPLOAD DATA PAGE ---------- */
+html body .stApp .upload-card-title,
+html body .stApp [class*="upload-card-title"],
+html body .stApp [class*="Upload-card-title"] {
+  color: #67e8f9 !important;
+  opacity: 1 !important;
+  font-weight: 1000 !important;
+}
+
+html body .stApp .upload-desc,
+html body .stApp [class*="upload-desc"],
+html body .stApp [class*="Upload-desc"],
+html body .stApp .upload-card,
+html body .stApp .upload-card p,
+html body .stApp .upload-card span,
+html body .stApp .upload-card div,
+html body .stApp [class*="upload-card"] p,
+html body .stApp [class*="upload-card"] span,
+html body .stApp [class*="upload-card"] div {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  font-weight: 750 !important;
+}
+
+html body .stApp .upload-kpi-label,
+html body .stApp [class*="upload-kpi-label"] {
+  color: #dff6ff !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+}
+
+html body .stApp .upload-kpi-value,
+html body .stApp [class*="upload-kpi-value"] {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-weight: 1000 !important;
+}
+
+/* Uploader bawaan Streamlit */
+html body .stApp div[data-testid="stFileUploader"],
+html body .stApp div[data-testid="stFileUploader"] *,
+html body .stApp div[data-testid="stFileUploaderDropzone"],
+html body .stApp div[data-testid="stFileUploaderDropzone"] * {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html body .stApp div[data-testid="stFileUploader"] button,
+html body .stApp div[data-testid="stFileUploader"] button * {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+}
+
+/* ---------- DATA CLEANING PAGE ---------- */
+html body .stApp .clean-card-title,
+html body .stApp [class*="clean-card-title"],
+html body .stApp [class*="Cleaning"] h1,
+html body .stApp [class*="Cleaning"] h2,
+html body .stApp [class*="Cleaning"] h3,
+html body .stApp [class*="Cleaning"] h4 {
+  color: #67e8f9 !important;
+  opacity: 1 !important;
+  font-weight: 1000 !important;
+}
+
+html body .stApp .clean-desc,
+html body .stApp [class*="clean-desc"],
+html body .stApp .clean-card,
+html body .stApp .clean-card p,
+html body .stApp .clean-card span,
+html body .stApp .clean-card div,
+html body .stApp .clean-status-box,
+html body .stApp .clean-status-box p,
+html body .stApp .clean-status-box span,
+html body .stApp .clean-status-box div,
+html body .stApp .clean-action-box,
+html body .stApp .clean-action-box p,
+html body .stApp .clean-action-box span,
+html body .stApp .clean-action-box div,
+html body .stApp [class*="clean-status"] p,
+html body .stApp [class*="clean-status"] span,
+html body .stApp [class*="clean-status"] div,
+html body .stApp [class*="clean-action"] p,
+html body .stApp [class*="clean-action"] span,
+html body .stApp [class*="clean-action"] div {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  font-weight: 750 !important;
+}
+
+html body .stApp .clean-kpi-label,
+html body .stApp [class*="clean-kpi-label"] {
+  color: #dff6ff !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+}
+
+html body .stApp .clean-kpi-value,
+html body .stApp [class*="clean-kpi-value"] {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-weight: 1000 !important;
+}
+
+/* KPI/Metric fallback untuk angka seperti Missing Values, Duplicate Rows, Rows Before */
+html body .stApp [data-testid="stMetricValue"],
+html body .stApp [data-testid="stMetricValue"] *,
+html body .stApp [class*="kpi-value"],
+html body .stApp [class*="Kpi-value"],
+html body .stApp [class*="metric-value"],
+html body .stApp [class*="Metric-value"],
+html body .stApp [class*="metric_value"],
+html body .stApp [class*="MetricValue"],
+html body .stApp [class*="Value"] {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-weight: 1000 !important;
+}
+
+html body .stApp [data-testid="stMetricLabel"],
+html body .stApp [data-testid="stMetricLabel"] *,
+html body .stApp [class*="kpi-label"],
+html body .stApp [class*="Kpi-label"],
+html body .stApp [class*="metric-label"],
+html body .stApp [class*="Metric-label"],
+html body .stApp [class*="metric_label"],
+html body .stApp [class*="MetricLabel"],
+html body .stApp [class*="Label"] {
+  color: #dff6ff !important;
+  opacity: 1 !important;
+  font-weight: 900 !important;
+}
+
+/* ---------- REPORTING PAGE ---------- */
+html body .stApp [class*="report"],
+html body .stApp [class*="Report"],
+html body .stApp [class*="download"],
+html body .stApp [class*="Download"],
+html body .stApp [class*="pdf"],
+html body .stApp [class*="PDF"],
+html body .stApp [class*="saved"],
+html body .stApp [class*="Saved"],
+html body .stApp [class*="path"],
+html body .stApp [class*="Path"] {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html body .stApp [class*="report"] p,
+html body .stApp [class*="report"] span,
+html body .stApp [class*="report"] div,
+html body .stApp [class*="Report"] p,
+html body .stApp [class*="Report"] span,
+html body .stApp [class*="Report"] div,
+html body .stApp [class*="download"] p,
+html body .stApp [class*="download"] span,
+html body .stApp [class*="download"] div,
+html body .stApp [class*="Download"] p,
+html body .stApp [class*="Download"] span,
+html body .stApp [class*="Download"] div,
+html body .stApp [class*="pdf"] p,
+html body .stApp [class*="pdf"] span,
+html body .stApp [class*="pdf"] div,
+html body .stApp [class*="PDF"] p,
+html body .stApp [class*="PDF"] span,
+html body .stApp [class*="PDF"] div {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  font-weight: 750 !important;
+}
+
+/* Caption Streamlit: contoh Saved path */
+html body .stApp div[data-testid="stCaptionContainer"],
+html body .stApp div[data-testid="stCaptionContainer"] *,
+html body .stApp .stCaptionContainer,
+html body .stApp .stCaptionContainer *,
+html body .stApp caption,
+html body .stApp code,
+html body .stApp pre {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  filter: none !important;
+  font-weight: 750 !important;
+}
+
+/* Alert sukses/error/info */
+html body .stApp div[data-testid="stAlert"],
+html body .stApp div[data-testid="stAlert"] *,
+html body .stApp .stAlert,
+html body .stApp .stAlert * {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  font-weight: 850 !important;
+}
+
+/* ---------- INLINE STYLE OVERRIDE ----------
+   Ini penting karena beberapa teks dihasilkan dari st.markdown HTML
+   dengan style color lama seperti #334155 / #64748b / #0f172a.
+*/
+html body .stApp div[style*="color: #334155"],
+html body .stApp span[style*="color: #334155"],
+html body .stApp p[style*="color: #334155"],
+html body .stApp div[style*="color:#334155"],
+html body .stApp span[style*="color:#334155"],
+html body .stApp p[style*="color:#334155"],
+html body .stApp div[style*="color: #64748b"],
+html body .stApp span[style*="color: #64748b"],
+html body .stApp p[style*="color: #64748b"],
+html body .stApp div[style*="color:#64748b"],
+html body .stApp span[style*="color:#64748b"],
+html body .stApp p[style*="color:#64748b"],
+html body .stApp div[style*="color: #0f172a"],
+html body .stApp span[style*="color: #0f172a"],
+html body .stApp p[style*="color: #0f172a"],
+html body .stApp div[style*="color:#0f172a"],
+html body .stApp span[style*="color:#0f172a"],
+html body .stApp p[style*="color:#0f172a"] {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Selectbox/input tetap terbaca */
+html body .stApp input,
+html body .stApp textarea,
+html body .stApp div[data-baseweb="select"],
+html body .stApp div[data-baseweb="select"] *,
+html body .stApp div[data-baseweb="input"],
+html body .stApp div[data-baseweb="input"] *,
+html body .stApp div[data-baseweb="textarea"],
+html body .stApp div[data-baseweb="textarea"] * {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+}
+
+/* Tabel tetap terbaca */
+html body .stApp div[data-testid="stDataFrame"],
+html body .stApp div[data-testid="stDataFrame"] *,
+html body .stApp table,
+html body .stApp table * {
+  color: #f8fafc !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   FINAL FIX — FILE SUMMARY TITLE WHITE
+   Fokus: judul "File Summary" yang masih gelap setelah upload data.
+   Hanya mengubah warna judul section, tidak mengubah layout.
+========================================================= */
+
+html body .stApp .section-title,
+html body .stApp .section-title *,
+html body .stApp div.section-title,
+html body .stApp div.section-title *,
+html body .stApp [class="section-title"],
+html body .stApp [class="section-title"] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: 0 0 14px rgba(103, 232, 249, 0.28) !important;
+  font-weight: 1000 !important;
+}
+
+/* Kalau judul dibuat dengan inline style warna gelap */
+html body .stApp .section-title[style*="color"],
+html body .stApp .section-title *[style*="color"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Khusus emoji/icon di judul tetap terlihat normal */
+html body .stApp .section-title::before,
+html body .stApp .section-title::after {
+  -webkit-text-fill-color: initial !important;
+}
+
+/* =========================================================
+   EMERGENCY FIX — FILE SUMMARY HEADING FORCE WHITE
+   Penyebab: "File Summary" kemungkinan bukan .section-title,
+   melainkan heading markdown Streamlit (h1/h2/h3) dengan anchor link.
+   Patch ini hanya memutihkan heading dan link anchor pada area utama.
+========================================================= */
+
+/* Paksa semua heading markdown di area utama jadi putih */
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h1,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h2,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h3,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h4,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h1 *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h2 *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h3 *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h4 * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  font-weight: 1000 !important;
+  text-shadow: 0 0 16px rgba(103, 232, 249, 0.26) !important;
+}
+
+/* Khusus anchor/link icon kecil di sebelah File Summary */
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h1 a,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h2 a,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h3 a,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h4 a,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h1 a *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h2 a *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h3 a *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] h4 a * {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 0.85 !important;
+}
+
+/* Kalau File Summary tetap dibuat div biasa tanpa class */
+html body .stApp section.main div[data-testid="stMarkdownContainer"] > div,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] > div *,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] > p,
+html body .stApp section.main div[data-testid="stMarkdownContainer"] > p * {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Paksa section-title dan semua kemungkinan title upload jadi putih */
+html body .stApp section.main .section-title,
+html body .stApp section.main .section-title *,
+html body .stApp section.main [class*="section-title"],
+html body .stApp section.main [class*="section-title"] *,
+html body .stApp section.main [class*="file-summary"],
+html body .stApp section.main [class*="file-summary"] *,
+html body .stApp section.main [class*="File-Summary"],
+html body .stApp section.main [class*="File-Summary"] *,
+html body .stApp section.main [class*="summary-title"],
+html body .stApp section.main [class*="summary-title"] *,
+html body .stApp section.main [class*="Summary-title"],
+html body .stApp section.main [class*="Summary-title"] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  font-weight: 1000 !important;
+}
+
+/* Override untuk style inline gelap pada heading */
+html body .stApp section.main h1[style],
+html body .stApp section.main h2[style],
+html body .stApp section.main h3[style],
+html body .stApp section.main h4[style],
+html body .stApp section.main h1[style] *,
+html body .stApp section.main h2[style] *,
+html body .stApp section.main h3[style] *,
+html body .stApp section.main h4[style] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Jika Streamlit membungkus heading dengan role/link tertentu */
+html body .stApp section.main [data-testid="stMarkdownContainer"] [id*="file-summary"],
+html body .stApp section.main [data-testid="stMarkdownContainer"] [id*="file-summary"] *,
+html body .stApp section.main [data-testid="stMarkdownContainer"] [href*="file-summary"],
+html body .stApp section.main [data-testid="stMarkdownContainer"] [href*="file-summary"] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* =========================================================
+   FINAL FIX — REMOVE EMPTY CLEANING BOXES
+   Fokus: menghapus 2 box kosong di atas "Cleaning Summary"
+   dan "Missing Value per Variable".
+   Tidak mengubah layout lain, hanya menyembunyikan clean-card kosong.
+========================================================= */
+
+section.main .clean-card:empty,
+section.main div.clean-card:empty,
+html body .stApp section.main .clean-card:empty,
+html body .stApp section.main div.clean-card:empty {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+/* Cadangan: kalau Streamlit membungkus HTML kosong menjadi elemen kecil */
+section.main div[data-testid="stMarkdownContainer"] > div.clean-card:empty,
+section.main div[data-testid="stMarkdownContainer"] .clean-card:empty {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+/* Jaga judul Cleaning Summary dan Missing Value tetap rapi setelah box kosong hilang */
+section.main .clean-card-title {
+  margin-top: 0 !important;
+}
+
+/* =========================================================
+   FINAL HARD FIX — REMOVE CLEAN-CARD EMPTY WRAPPER V2
+   Penyebab box kosong:
+   st.markdown('<div class="clean-card">') dirender sebagai card kosong.
+   Patch ini menyembunyikan clean-card yang tidak punya isi/tabel/title.
+   Tidak menghapus tabel Cleaning Summary dan Missing Value.
+========================================================= */
+
+/* Sembunyikan clean-card yang tidak berisi judul/tabel/konten penting */
+html body .stApp section.main .clean-card:not(:has(.clean-card-title)):not(:has(.ag-theme-streamlit)):not(:has(table)):not(:has([data-testid="stDataFrame"])) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+/* Sembunyikan wrapper markdown Streamlit yang hanya berisi clean-card kosong */
+html body .stApp section.main div[data-testid="stMarkdownContainer"]:has(.clean-card:not(:has(.clean-card-title)):not(:has(.ag-theme-streamlit)):not(:has(table)):not(:has([data-testid="stDataFrame"]))) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+/* Sembunyikan block kosong hasil pembungkus Streamlit di atas judul Cleaning Summary */
+html body .stApp section.main div[data-testid="element-container"]:has(div[data-testid="stMarkdownContainer"] .clean-card:not(:has(.clean-card-title)):not(:has(.ag-theme-streamlit)):not(:has(table)):not(:has([data-testid="stDataFrame"]))) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+/* Kurangi jarak setelah box kosong hilang */
+html body .stApp section.main .clean-card-title {
+  margin-top: 0 !important;
+}
