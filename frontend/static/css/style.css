@@ -1,0 +1,3001 @@
+/* =========================================================
+   ELITE GLASSMORPHISM CSS
+   LIGHT : Crystal Pastel Blue × Cobalt Ink
+   DARK  : Obsidian Navy × Aurora Spectrum
+   Fonts : Syne (display) · DM Sans (body) · Space Mono
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* =========================================================
+   DESIGN TOKENS
+========================================================= */
+
+:root {
+  /* Light Palette */
+  --l-canvas:        #eef3ff;
+  --l-canvas-2:      #e3ecff;
+  --l-canvas-3:      #d8e5ff;
+  --l-glass:         rgba(255, 255, 255, 0.68);
+  --l-glass-2:       rgba(255, 255, 255, 0.44);
+  --l-glass-3:       rgba(255, 255, 255, 0.22);
+
+  --l-cobalt:        #1a56e8;
+  --l-cobalt-2:      #1641c2;
+  --l-cobalt-3:      #4f7ef2;
+  --l-cobalt-pale:   rgba(26, 86, 232, 0.10);
+  --l-cobalt-glow:   rgba(26, 86, 232, 0.24);
+
+  --l-violet:        #6d28d9;
+  --l-violet-soft:   #9b6df7;
+  --l-violet-pale:   rgba(109, 40, 217, 0.10);
+
+  --l-cyan:          #0e7fcb;
+  --l-cyan-bright:   #24d1ef;
+  --l-cyan-pale:     rgba(14, 127, 203, 0.09);
+
+  --l-rose:          #e11d6c;
+  --l-rose-pale:     rgba(225, 29, 108, 0.08);
+
+  --l-ink-0:         #060e23;
+  --l-ink-1:         #0f1f3d;
+  --l-ink-2:         #1b3461;
+  --l-ink-3:         #2d4f86;
+  --l-ink-4:         #5c7aaa;
+  --l-ink-5:         #92a8cc;
+
+  --l-border:        rgba(26, 86, 232, 0.16);
+  --l-border-hi:     rgba(26, 86, 232, 0.34);
+  --l-shine:         rgba(255, 255, 255, 0.80);
+
+  --l-shadow:        0 24px 64px rgba(9, 23, 54, 0.14), 0 6px 24px rgba(26, 86, 232, 0.09);
+  --l-shadow-glow:   0 0 40px rgba(26, 86, 232, 0.22), 0 0 80px rgba(109, 40, 217, 0.10);
+  --l-shadow-sm:     0 4px 20px rgba(9, 23, 54, 0.09), 0 1px 4px rgba(26, 86, 232, 0.06);
+
+  /* Dark Palette */
+  --d-void:          #01060f;
+  --d-void-2:        #020b1a;
+  --d-void-3:        #031226;
+  --d-glass:         rgba(255, 255, 255, 0.035);
+  --d-glass-2:       rgba(255, 255, 255, 0.020);
+  --d-glass-hi:      rgba(255, 255, 255, 0.055);
+
+  --d-aurora-1:      #34d9f0;  /* ice cyan */
+  --d-aurora-2:      #7c6ef0;  /* deep violet */
+  --d-aurora-3:      #c36ef5;  /* purple */
+  --d-aurora-4:      #3dffd0;  /* mint */
+  --d-aurora-5:      #f06ba0;  /* rose */
+  --d-aurora-6:      #ffcb47;  /* gold */
+
+  --d-navy-1:        #132240;
+  --d-navy-2:        #0d1a30;
+
+  --d-tx-1:          #f8fafc;
+  --d-tx-2:          #e2e8f0;
+  --d-tx-3:          #cbd5e1;
+
+  --d-border:        rgba(52, 217, 240, 0.12);
+  --d-border-hi:     rgba(52, 217, 240, 0.26);
+
+  --d-shadow:        0 28px 72px rgba(0, 0, 0, 0.80), 0 8px 28px rgba(0, 0, 0, 0.55);
+  --d-shadow-aurora: 0 0 44px rgba(52, 217, 240, 0.14), 0 0 88px rgba(124, 110, 240, 0.09);
+  --d-shadow-sm:     0 4px 18px rgba(0, 0, 0, 0.60);
+
+  /* Typography */
+  --font-display:    'Syne', sans-serif;
+  --font-body:       'DM Sans', sans-serif;
+  --font-mono:       'Space Mono', monospace;
+
+  /* Easing */
+  --ease-spring:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   KEYFRAMES
+========================================================= */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0%   { left: -110%; }
+  100% { left: 210%; }
+}
+
+@keyframes orbitalSpin {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+
+@keyframes floatDrift {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  40%       { transform: translateY(-7px) rotate(0.6deg); }
+  70%       { transform: translateY(-4px) rotate(-0.4deg); }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-10%); opacity: 0; }
+  6%   { opacity: 1; }
+  94%  { opacity: 1; }
+  100% { transform: translateY(112%); opacity: 0; }
+}
+
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50%       { box-shadow: 0 0 0 7px transparent; }
+}
+
+@keyframes crystallize {
+  0%, 100% {
+    box-shadow:
+      0 0 22px rgba(26, 86, 232, 0.18),
+      0 0 60px rgba(109, 40, 217, 0.09),
+      inset 0 1px 0 rgba(255,255,255,0.70);
+  }
+  50% {
+    box-shadow:
+      0 0 38px rgba(26, 86, 232, 0.30),
+      0 0 90px rgba(109, 40, 217, 0.15),
+      inset 0 1px 0 rgba(255,255,255,0.85);
+  }
+}
+
+@keyframes auroraBreath {
+  0%, 100% {
+    box-shadow:
+      0 0 28px rgba(52, 217, 240, 0.18),
+      0 0 70px rgba(124, 110, 240, 0.10),
+      inset 0 0 28px rgba(52, 217, 240, 0.03);
+  }
+  50% {
+    box-shadow:
+      0 0 48px rgba(52, 217, 240, 0.32),
+      0 0 110px rgba(124, 110, 240, 0.18),
+      inset 0 0 40px rgba(52, 217, 240, 0.07);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 90%, 100% { opacity: 1; }
+  92%            { opacity: 0.55; }
+  94%            { opacity: 1; }
+  97%            { opacity: 0.75; }
+}
+
+@keyframes underlineReveal {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes tokenSlide {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes inkDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.70; }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* =========================================================
+   RESET & GLOBAL
+========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+::selection {
+  background: rgba(26, 86, 232, 0.20);
+  color: var(--l-ink-1);
+}
+
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--l-canvas-2); border-radius: 99px; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--l-cobalt), var(--l-violet));
+  border-radius: 99px;
+}
+
+/* =========================================================
+   LIGHT MODE — BODY / CANVAS
+========================================================= */
+
+.main {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--l-ink-1);
+  background-color: var(--l-canvas);
+  background-image:
+    /* Crystalline light blobs */
+    radial-gradient(ellipse 68% 44% at  0%   0%, rgba(26, 86, 232, 0.13)  0%, transparent 55%),
+    radial-gradient(ellipse 50% 36% at 100%  8%, rgba(109, 40, 217, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 42% 38% at 52% 100%, rgba(14, 127, 203, 0.07) 0%, transparent 52%),
+    radial-gradient(ellipse 30% 28% at  5%  82%, rgba(79, 126, 242, 0.10) 0%, transparent 50%),
+    /* Micro dot texture */
+    radial-gradient(rgba(26, 86, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(148deg, #eef3ff 0%, #e9f0ff 45%, #f2eeff 72%, #edf4ff 100%);
+  background-size:
+    100% 100%, 100% 100%, 100% 100%, 100% 100%,
+    28px 28px,
+    100% 100%;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.block-container {
+  padding-top: 1rem !important;
+  padding-bottom: 3rem !important;
+  max-width: 96% !important;
+}
+
+header[data-testid="stHeader"] { background: transparent !important; }
+
+/* =========================================================
+   SECTION TITLE — CHROMATIC GRADIENT PILL
+========================================================= */
+
+.section-title {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: 0.2px;
+  color: #fff;
+  padding: 15px 24px;
+  margin-bottom: 22px;
+  border-radius: 20px;
+  background: linear-gradient(112deg,
+    var(--l-cobalt-2) 0%,
+    var(--l-violet)   40%,
+    var(--l-cyan)     75%,
+    var(--l-cobalt)   100%
+  );
+  background-size: 260% 260%;
+  animation: gradientFlow 7s ease infinite;
+  box-shadow: var(--l-shadow-sm), var(--l-shadow-glow);
+}
+
+/* Shimmer sweep */
+.section-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -110%;
+  width: 60%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255,255,255,0.26),
+    transparent
+  );
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Underline accent */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 24px;
+  height: 2px; width: 48px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 99px;
+  animation: underlineReveal 0.8s var(--ease-out) both;
+}
+
+/* =========================================================
+   GLASS CARD BASE
+========================================================= */
+
+.info-card,
+.insight-box,
+.health-card,
+.quick-card,
+.widget-card {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: var(--l-glass);
+  backdrop-filter: blur(28px) saturate(155%);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  border: 1px solid var(--l-border);
+  border-radius: 22px;
+  box-shadow: var(--l-shadow);
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
+
+/* Crystal top-edge */
+.info-card::after,
+.quick-card::after,
+.health-card::after,
+.widget-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--l-shine) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* =========================================================
+   INFO CARD — Crystalline left-accent
+========================================================= */
+
+.info-card {
+  padding: 20px 22px 20px 28px;
+  margin-bottom: 14px;
+  animation: crystallize 6s ease-in-out infinite;
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 14%; bottom: 14%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--l-cobalt), var(--l-violet));
+}
+
+/* =========================================================
+   INSIGHT BOX — Frosted with tinted top bar
+========================================================= */
+
+.insight-box {
+  padding: 18px 22px 18px 28px;
+  margin-bottom: 14px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--l-ink-2);
+  background: linear-gradient(
+    145deg,
+    rgba(26, 86, 232, 0.05) 0%,
+    rgba(255,255,255,0.62) 100%
+  );
+  border-color: rgba(26, 86, 232, 0.18);
+}
+
+.insight-box::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 14%; bottom: 14%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--l-cobalt), var(--l-cyan-bright));
+}
+
+.small-note {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--l-ink-5);
+  letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   LANDING CARD — Hero orbital glass
+========================================================= */
+
+.landing-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  animation: fadeUp 0.65s var(--ease-out) both;
+}
+
+.landing-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at  6% 0%,  rgba(26, 86, 232, 0.11), transparent 48%),
+    radial-gradient(ellipse at 94% 100%, rgba(109, 40, 217, 0.08), transparent 48%),
+    rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(36px) saturate(165%);
+  -webkit-backdrop-filter: blur(36px) saturate(165%);
+  border: 1px solid var(--l-border-hi);
+  border-radius: 32px;
+  box-shadow: var(--l-shadow), var(--l-shadow-glow);
+  padding: 24px 30px;
+  text-align: center;
+  animation: crystallize 8s ease-in-out infinite;
+}
+
+/* Orbital rainbow border */
+.landing-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 33px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 40%,
+    rgba(26, 86, 232, 0.72)  48%,
+    rgba(255,255,255,0.48)   52%,
+    rgba(109, 40, 217, 0.60) 58%,
+    rgba(14, 127, 203, 0.48) 65%,
+    rgba(225, 29, 108, 0.32) 72%,
+    transparent 80%
+  );
+  animation: orbitalSpin 5s linear infinite;
+  z-index: 0;
+}
+
+/* Inner cover */
+.landing-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 31px;
+  background: linear-gradient(148deg, #f6f9ff 0%, #eef3ff 100%);
+  z-index: 0;
+}
+
+.landing-card > * { position: relative; z-index: 1; }
+
+/* =========================================================
+   TOP CAMPUS BAR
+========================================================= */
+
+.top-campus-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.76);
+  border: 1px solid var(--l-border-hi);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--l-shadow-sm);
+}
+
+.campus-left  { display: flex; align-items: center; gap: 11px; }
+
+.campus-right {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--l-cobalt);
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.campus-logo {
+  width: 54px; height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 16px rgba(26, 86, 232, 0.32));
+  animation: floatDrift 7s ease-in-out infinite;
+}
+
+/* =========================================================
+   LANDING TITLE
+========================================================= */
+
+.landing-title-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 6px 0 8px;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.08;
+  margin: 4px 0;
+  background: linear-gradient(128deg,
+    var(--l-ink-0)    0%,
+    var(--l-cobalt)   20%,
+    var(--l-violet)   44%,
+    var(--l-cyan)     66%,
+    var(--l-cobalt-2) 86%,
+    var(--l-ink-1)   100%
+  );
+  background-size: 300% 300%;
+  animation: gradientFlow 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.project-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--l-ink-4);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.group-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 20px;
+  border-radius: 999px;
+  background: linear-gradient(112deg,
+    rgba(26, 86, 232, 0.10) 0%,
+    rgba(109, 40, 217, 0.09) 100%
+  );
+  border: 1px solid var(--l-border-hi);
+  backdrop-filter: blur(14px);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--l-cobalt);
+  margin: 8px 0 16px;
+  animation: tokenSlide 0.7s var(--ease-out) both;
+}
+
+.group-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--l-cobalt);
+  box-shadow: 0 0 10px var(--l-cobalt-3);
+  animation: inkDot 2.2s ease-in-out infinite, pulseRing 2.2s ease-out infinite;
+  color: var(--l-cobalt);
+}
+
+/* =========================================================
+   MEMBER CARDS — FINAL PREMIUM VERSION
+========================================================= */
+
+.member-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--l-glass);
+  backdrop-filter: blur(20px) saturate(148%);
+  -webkit-backdrop-filter: blur(20px) saturate(148%);
+  border: 1px solid var(--l-border);
+  border-radius: 22px;
+  box-shadow: var(--l-shadow-sm);
+  padding: 14px 10px;
+  text-align: center;
+  min-height: 155px;
+  cursor: pointer;
+  transition:
+    transform 0.35s var(--ease-spring),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+  animation: fadeUp 0.55s var(--ease-out) both;
+}
+
+/* Crystal top edge */
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--l-shine),
+    transparent
+  );
+}
+
+/* Prismatic hover glow */
+.member-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 86, 232, 0.08) 0%,
+    rgba(109, 40, 217, 0.06) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+
+.member-card:hover {
+  transform: translateY(-11px) scale(1.03);
+  border-color: var(--l-border-hi);
+  box-shadow:
+    var(--l-shadow),
+    var(--l-shadow-glow);
+}
+
+.member-card:hover::after {
+  opacity: 1;
+}
+
+.member-photo {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  background: var(--l-canvas-2);
+  border: 2px solid var(--l-border-hi);
+  box-shadow: 0 6px 20px rgba(9, 23, 54, 0.15);
+  transition:
+    transform 0.28s var(--ease-spring),
+    box-shadow 0.28s ease;
+}
+
+.member-card:hover .member-photo {
+  transform: scale(1.08) rotate(2deg);
+  box-shadow:
+    0 0 0 4px rgba(26, 86, 232, 0.35),
+    0 0 28px rgba(26, 86, 232, 0.30),
+    0 12px 28px rgba(9, 23, 54, 0.22);
+}
+
+.member-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--l-ink-1);
+  margin-top: 10px;
+  line-height: 1.3;
+}
+
+.member-nim {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--l-ink-5);
+  margin-top: 3px;
+  letter-spacing: 0.4px;
+}
+
+/* =========================================================
+   IDENTITY BOX
+========================================================= */
+
+.identity-box {
+  position: relative;
+  overflow: hidden;
+  background: var(--l-glass);
+  backdrop-filter: blur(22px) saturate(148%);
+  -webkit-backdrop-filter: blur(22px) saturate(148%);
+  border: 1px solid var(--l-border);
+  border-radius: 22px;
+  box-shadow: var(--l-shadow-sm);
+  padding: 16px;
+  margin-top: 14px;
+  z-index: 2;
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.identity-item {
+  padding: 12px 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.68);
+  border: 1px solid var(--l-border);
+  transition:
+    transform 0.30s var(--ease-spring),
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.identity-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--l-border-hi);
+  box-shadow: var(--l-shadow-sm), var(--l-shadow-glow);
+}
+
+.identity-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--l-ink-5);
+}
+
+.identity-value {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--l-cobalt);
+  margin-top: 5px;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.login-wrapper {
+  max-width: 480px;
+  margin: 28px auto 0;
+  animation: fadeUp 0.60s var(--ease-out) both;
+}
+
+.login-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(36px) saturate(165%);
+  -webkit-backdrop-filter: blur(36px) saturate(165%);
+  border: 1px solid var(--l-border-hi);
+  border-radius: 30px;
+  box-shadow: var(--l-shadow), var(--l-shadow-glow);
+  padding: 36px;
+  text-align: center;
+  animation: crystallize 9s ease-in-out infinite;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 31px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 50%,
+    rgba(26, 86, 232, 0.70)  58%,
+    rgba(109, 40, 217, 0.55) 65%,
+    rgba(14, 127, 203, 0.42) 72%,
+    transparent 80%
+  );
+  animation: orbitalSpin 6.5s linear infinite;
+  z-index: 0;
+}
+
+.login-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 29px;
+  background: rgba(255,255,255,0.97);
+  z-index: 0;
+}
+
+.login-card > * { position: relative; z-index: 1; }
+
+.login-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  background: linear-gradient(124deg,
+    var(--l-ink-0),
+    var(--l-cobalt),
+    var(--l-violet)
+  );
+  background-size: 260% 260%;
+  animation: gradientFlow 5.5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  color: var(--l-ink-4);
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+/* =========================================================
+   HEALTH + QUICK CARDS
+========================================================= */
+
+.health-card {
+  padding: 26px;
+  text-align: center;
+}
+
+.health-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 14%; bottom: 14%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--l-cobalt), var(--l-cyan));
+}
+
+.health-score {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--l-cobalt);
+  line-height: 1;
+  margin: 8px 0;
+  animation: crystallize 4s ease-in-out infinite;
+}
+
+.quick-card {
+  padding: 24px;
+  min-height: 178px;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.quick-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 14%; bottom: 14%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--l-violet), var(--l-cobalt));
+}
+
+.quick-card:hover {
+  border-color: var(--l-border-hi);
+  box-shadow: var(--l-shadow), var(--l-shadow-glow);
+}
+
+.quick-card h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--l-ink-1);
+  margin: 0 0 11px;
+}
+
+.quick-card p {
+  font-size: 14px;
+  color: var(--l-ink-3);
+  line-height: 1.68;
+  margin: 0;
+}
+
+/* =========================================================
+   WIDGET CARD (general purpose)
+========================================================= */
+
+.widget-card {
+  padding: 22px;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.widget-card:hover {
+  border-color: var(--l-border-hi);
+  box-shadow: var(--l-shadow), var(--l-shadow-glow);
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar-user-box {
+  margin-top: 32px;
+  padding: 16px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid var(--l-border-hi);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: var(--l-shadow-sm), var(--l-shadow-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-user-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, rgba(26, 86, 232, 0.55), transparent
+  );
+}
+
+.sidebar-user-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--l-ink-5);
+}
+
+.sidebar-user-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--l-cobalt);
+  margin-top: 5px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.stButton > button {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  color: #fff !important;
+  background: linear-gradient(112deg,
+    var(--l-cobalt-2) 0%,
+    var(--l-violet)   48%,
+    var(--l-cyan)     100%
+  ) !important;
+  background-size: 220% 220% !important;
+  animation: gradientFlow 4.5s ease infinite !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: var(--l-shadow-sm), var(--l-shadow-glow) !important;
+  transition:
+    transform 0.30s var(--ease-spring),
+    box-shadow 0.28s ease !important;
+}
+
+.stButton > button::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: -110%;
+  width: 60%;
+  background: linear-gradient(90deg,
+    transparent, rgba(255,255,255,0.28), transparent
+  );
+  pointer-events: none;
+}
+
+.stButton > button:hover {
+  transform: translateY(-3px) scale(1.016) !important;
+  box-shadow: var(--l-shadow), var(--l-shadow-glow) !important;
+}
+
+.stButton > button:hover::before {
+  animation: shimmer 0.55s ease forwards;
+}
+
+.stButton > button:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+.stTextInput input,
+.stTextArea textarea {
+  font-family: var(--font-body) !important;
+  background: rgba(255,255,255,0.82) !important;
+  border: 1px solid var(--l-border-hi) !important;
+  border-radius: 14px !important;
+  color: var(--l-ink-1) !important;
+  transition: border-color 0.24s ease, box-shadow 0.24s ease !important;
+}
+
+input:focus,
+.stTextInput input:focus,
+.stTextArea textarea:focus {
+  border-color: rgba(26, 86, 232, 0.60) !important;
+  box-shadow: 0 0 0 3px rgba(26, 86, 232, 0.13) !important;
+  outline: none !important;
+}
+
+/* =========================================================
+   DARK MODE — AURORA OBSIDIAN
+========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* Canvas */
+  .main {
+    color: var(--d-tx-1);
+    background-color: var(--d-void);
+    background-image:
+      /* Aurora blobs */
+      radial-gradient(ellipse 52% 30% at  4%   4%, rgba(52, 217, 240, 0.09)  0%, transparent 58%),
+      radial-gradient(ellipse 44% 26% at 96%  10%, rgba(124, 110, 240, 0.09) 0%, transparent 54%),
+      radial-gradient(ellipse 36% 28% at 50%  95%, rgba(195, 110, 245, 0.07) 0%, transparent 54%),
+      radial-gradient(ellipse 38% 32% at  5%  78%, rgba(29, 78, 216, 0.11)   0%, transparent 52%),
+      radial-gradient(ellipse 28% 22% at 82%  62%, rgba(61, 255, 208, 0.05)  0%, transparent 48%),
+      /* Grid overlay */
+      linear-gradient(rgba(52, 217, 240, 0.024) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52, 217, 240, 0.024) 1px, transparent 1px),
+      /* Base gradient */
+      linear-gradient(148deg, #01060f 0%, #030d1e 45%, #050c1c 72%, #01060f 100%);
+    background-size:
+      100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%,
+      60px 60px, 60px 60px,
+      100% 100%;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(52, 217, 240, 0.20);
+    color: var(--d-aurora-1);
+  }
+
+  ::-webkit-scrollbar-track { background: var(--d-void-2); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--d-aurora-1), var(--d-aurora-2));
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    background: linear-gradient(112deg,
+      rgba(52, 217, 240, 0.14) 0%,
+      rgba(124, 110, 240, 0.14) 40%,
+      rgba(195, 110, 245, 0.14) 80%,
+      rgba(52, 217, 240, 0.14) 100%
+    ) !important;
+    background-size: 260% 260% !important;
+    border: 1px solid var(--d-border-hi);
+    color: var(--d-aurora-1);
+    text-shadow:
+      0 0 24px rgba(52, 217, 240, 0.65),
+      0 0 48px rgba(124, 110, 240, 0.22);
+    animation: gradientFlow 7s ease infinite, neonPulse 10s ease infinite;
+    box-shadow:
+      var(--d-shadow),
+      0 0 36px rgba(52, 217, 240, 0.13),
+      0 0 72px rgba(124, 110, 240, 0.08);
+  }
+
+  .section-title::after {
+    background: linear-gradient(90deg,
+      var(--d-aurora-1), var(--d-aurora-2), var(--d-aurora-3)
+    );
+  }
+
+  /* GLASS CARDS */
+  .info-card,
+  .insight-box,
+  .health-card,
+  .quick-card,
+  .widget-card {
+    background: var(--d-glass);
+    border-color: var(--d-border);
+    box-shadow: var(--d-shadow), var(--d-shadow-aurora);
+  }
+
+  .info-card::before {
+    background: linear-gradient(180deg, var(--d-aurora-1), var(--d-aurora-2));
+  }
+
+  .insight-box {
+    color: var(--d-tx-2);
+    border-color: rgba(52, 217, 240, 0.13);
+    background: linear-gradient(
+      145deg,
+      rgba(52, 217, 240, 0.04) 0%,
+      var(--d-glass) 100%
+    );
+  }
+
+  .insight-box::before {
+    background: linear-gradient(180deg, var(--d-aurora-1), var(--d-aurora-4));
+  }
+
+  .small-note { color: var(--d-tx-3); }
+
+  /* LANDING CARD */
+  .landing-card {
+    background:
+      radial-gradient(ellipse at 10% 0%,  rgba(52, 217, 240, 0.07), transparent 44%),
+      radial-gradient(ellipse at 90% 100%, rgba(124, 110, 240, 0.07), transparent 44%),
+      rgba(255,255,255,0.028);
+    border-color: var(--d-border-hi);
+    box-shadow: var(--d-shadow), var(--d-shadow-aurora);
+    animation: auroraBreath 6s ease-in-out infinite;
+  }
+
+  .landing-card::before {
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 26%,
+      rgba(52, 217, 240, 0.80)  36%,
+      rgba(255,255,255,0.26)    42%,
+      rgba(124, 110, 240, 0.68) 52%,
+      rgba(195, 110, 245, 0.55) 60%,
+      rgba(61, 255, 208, 0.38)  68%,
+      rgba(240, 107, 160, 0.30) 74%,
+      transparent 82%
+    );
+  }
+
+  .landing-card::after {
+    background: linear-gradient(148deg, #030d1e 0%, #031226 100%);
+  }
+
+  /* Aurora scanline */
+  .landing-card .aurora-scan {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 31px;
+  }
+
+  .landing-card .aurora-scan::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(52, 217, 240, 0.60),
+      rgba(124, 110, 240, 0.55),
+      rgba(195, 110, 245, 0.42),
+      transparent
+    );
+    animation: scanline 5s linear infinite;
+  }
+
+  /* TOP CAMPUS BAR */
+  .top-campus-bar {
+    background: rgba(255,255,255,0.028);
+    border-color: var(--d-border-hi);
+    box-shadow: 0 8px 36px rgba(0,0,0,0.65);
+  }
+
+  .campus-right { color: var(--d-aurora-1); }
+
+  /* LOGO */
+  .campus-logo {
+    filter:
+      drop-shadow(0 0 16px rgba(52, 217, 240, 0.60))
+      drop-shadow(0 0 32px rgba(124, 110, 240, 0.30));
+    animation: floatDrift 7s ease-in-out infinite;
+  }
+
+  /* TITLE */
+  .project-title {
+    background: linear-gradient(128deg,
+      var(--d-aurora-1)  0%,
+      var(--d-aurora-2)  20%,
+      var(--d-aurora-3)  44%,
+      var(--d-aurora-4)  65%,
+      var(--d-aurora-5)  82%,
+      var(--d-aurora-1)  100%
+    );
+    background-size: 300% 300%;
+    animation: gradientFlow 5.5s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .project-subtitle { color: var(--d-tx-3); }
+
+  .group-badge {
+    background: linear-gradient(112deg,
+      rgba(52, 217, 240, 0.11) 0%,
+      rgba(124, 110, 240, 0.11) 100%
+    );
+    border-color: var(--d-border-hi);
+    color: var(--d-aurora-1);
+  }
+
+  .group-badge::before {
+    background: var(--d-aurora-1);
+    box-shadow: 0 0 12px var(--d-aurora-1), 0 0 24px var(--d-aurora-2);
+    color: var(--d-aurora-1);
+  }
+
+  /* MEMBER CARDS */
+  .member-card {
+    background: var(--d-glass);
+    border-color: var(--d-border);
+    box-shadow: var(--d-shadow);
+  }
+
+  .member-card:hover {
+    border-color: rgba(52, 217, 240, 0.34);
+    box-shadow: var(--d-shadow), var(--d-shadow-aurora);
+  }
+
+  .member-card::before {
+    background: linear-gradient(90deg,
+      transparent, rgba(52, 217, 240, 0.06), transparent
+    );
+  }
+
+  .member-card::after { display: none; }
+
+  .member-photo {
+    border-color: var(--d-border-hi);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.65);
+  }
+
+  .member-card:hover .member-photo {
+    box-shadow:
+      0 0 0 2px rgba(52, 217, 240, 0.52),
+      0 0 24px rgba(52, 217, 240, 0.28),
+      0 8px 24px rgba(0,0,0,0.70);
+  }
+
+  .member-name { color: var(--d-tx-1); }
+  .member-nim  { color: var(--d-tx-3); }
+
+  /* IDENTITY BOX */
+  .identity-box {
+    background: var(--d-glass);
+    border-color: var(--d-border);
+    box-shadow: var(--d-shadow);
+  }
+
+  .identity-item {
+    background: var(--d-glass-2);
+    border-color: var(--d-border);
+  }
+
+  .identity-item:hover {
+    border-color: rgba(124, 110, 240, 0.34);
+    box-shadow: var(--d-shadow), 0 0 32px rgba(124, 110, 240, 0.16);
+  }
+
+  .identity-label { color: var(--d-tx-3); }
+  .identity-value { color: var(--d-aurora-1); }
+
+  /* LOGIN CARD */
+  .login-card {
+    background: rgba(255,255,255,0.022);
+    border-color: var(--d-border-hi);
+    box-shadow: var(--d-shadow), var(--d-shadow-aurora);
+    animation: auroraBreath 7s ease-in-out infinite;
+  }
+
+  .login-card::before {
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 46%,
+      rgba(52, 217, 240, 0.76)   54%,
+      rgba(124, 110, 240, 0.62)  62%,
+      rgba(195, 110, 245, 0.48)  70%,
+      transparent 78%
+    );
+  }
+
+  .login-card::after {
+    background: linear-gradient(148deg, #030d1e 0%, #031226 100%);
+  }
+
+  .login-title {
+    background: linear-gradient(124deg,
+      var(--d-aurora-1), var(--d-aurora-2), var(--d-aurora-3)
+    );
+    background-size: 260% 260%;
+    animation: gradientFlow 5.5s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .login-subtitle { color: var(--d-tx-3); }
+
+  /* HEALTH + QUICK CARDS */
+  .health-card {
+    background: var(--d-glass);
+    border-color: rgba(52, 217, 240, 0.16);
+    box-shadow: var(--d-shadow), 0 0 44px rgba(52, 217, 240, 0.07);
+  }
+
+  .health-card::before {
+    background: linear-gradient(180deg, var(--d-aurora-1), var(--d-aurora-2));
+  }
+
+  .health-score {
+    color: var(--d-aurora-1);
+    text-shadow:
+      0 0 26px rgba(52, 217, 240, 0.70),
+      0 0 52px rgba(52, 217, 240, 0.35);
+    animation: neonPulse 8s ease infinite;
+  }
+
+  .quick-card {
+    background: var(--d-glass);
+    border-color: var(--d-border);
+    box-shadow: var(--d-shadow);
+  }
+
+  .quick-card::before {
+    background: linear-gradient(180deg, var(--d-aurora-3), var(--d-aurora-2));
+  }
+
+  .quick-card:hover {
+    border-color: rgba(124, 110, 240, 0.30);
+    box-shadow: var(--d-shadow), 0 0 42px rgba(124, 110, 240, 0.14);
+  }
+
+  .quick-card h3 { color: var(--d-tx-1); }
+  .quick-card p  { color: var(--d-tx-2); }
+
+  /* WIDGET CARD */
+  .widget-card {
+    background: var(--d-glass);
+    border-color: var(--d-border);
+    box-shadow: var(--d-shadow);
+  }
+
+  .widget-card:hover {
+    border-color: rgba(52, 217, 240, 0.28);
+    box-shadow: var(--d-shadow), var(--d-shadow-aurora);
+  }
+
+  /* SIDEBAR */
+  .sidebar-user-box {
+    background: var(--d-glass);
+    border-color: var(--d-border-hi);
+    box-shadow: var(--d-shadow), var(--d-shadow-aurora);
+  }
+
+  .sidebar-user-box::before {
+    background: linear-gradient(90deg,
+      transparent, rgba(52, 217, 240, 0.42), transparent
+    );
+  }
+
+  .sidebar-user-label { color: var(--d-tx-3); }
+  .sidebar-user-name  { color: var(--d-aurora-1); }
+
+  /* BUTTONS */
+  .stButton > button {
+    background: linear-gradient(112deg,
+      rgba(52, 217, 240, 0.11)   0%,
+      rgba(124, 110, 240, 0.11)  50%,
+      rgba(195, 110, 245, 0.11)  100%
+    ) !important;
+    animation: none !important;
+    border: 1px solid var(--d-border-hi) !important;
+    color: var(--d-aurora-1) !important;
+    text-shadow: 0 0 20px rgba(52, 217, 240, 0.60);
+    box-shadow:
+      var(--d-shadow-sm),
+      0 0 22px rgba(52, 217, 240, 0.09) !important;
+  }
+
+  .stButton > button:hover {
+    border-color: rgba(52, 217, 240, 0.52) !important;
+    box-shadow:
+      var(--d-shadow),
+      0 0 36px rgba(52, 217, 240, 0.24),
+      0 0 72px rgba(124, 110, 240, 0.12) !important;
+  }
+
+  /* INPUTS */
+  input,
+  .stTextInput input,
+  .stTextArea textarea {
+    background: var(--d-glass) !important;
+    border-color: var(--d-border-hi) !important;
+    color: var(--d-tx-1) !important;
+  }
+
+  input:focus,
+  .stTextInput input:focus,
+  .stTextArea textarea:focus {
+    border-color: rgba(52, 217, 240, 0.52) !important;
+    box-shadow:
+      0 0 0 3px rgba(52, 217, 240, 0.12),
+      0 0 24px rgba(52, 217, 240, 0.07) !important;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .project-title  { font-size: 26px; }
+  .project-subtitle { font-size: 12px; }
+  .campus-logo    { width: 46px; height: 46px; }
+  .member-photo   { width: 58px; height: 58px; }
+  .member-name    { font-size: 11.5px; }
+  .member-nim     { font-size: 9.5px; }
+  .landing-card   { padding: 16px; border-radius: 24px; }
+  .identity-grid  { grid-template-columns: 1fr; }
+  .top-campus-bar { flex-direction: column; gap: 7px; border-radius: 26px; }
+  .campus-right   { text-align: center; font-size: 9.5px; }
+  .health-score   { font-size: 44px; }
+  .section-title  { font-size: 16px; }
+  .quick-card     { min-height: auto; }
+}
+
+@media (max-width: 480px) {
+  .project-title { font-size: 22px; }
+  .login-card    { padding: 24px 16px; border-radius: 22px; }
+  .group-badge   { font-size: 9.5px; padding: 6px 14px; }
+}
+
+/* =========================================================
+   UTILITY CLASSES
+========================================================= */
+
+.delay-1  { animation-delay: 0.06s; }
+.delay-2  { animation-delay: 0.12s; }
+.delay-3  { animation-delay: 0.18s; }
+.delay-4  { animation-delay: 0.24s; }
+.delay-5  { animation-delay: 0.30s; }
+.delay-6  { animation-delay: 0.36s; }
+
+.fade-up  { animation: fadeUp 0.5s var(--ease-out) both; }
+
+/* Chromatic text helper */
+.text-chromatic {
+  background: linear-gradient(112deg,
+    var(--l-cobalt), var(--l-violet), var(--l-cyan)
+  );
+  background-size: 240% 240%;
+  animation: gradientFlow 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mono label helper */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--l-ink-5);
+}
+
+/* Status dot */
+.status-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--l-cobalt);
+  box-shadow: 0 0 8px var(--l-cobalt-3);
+  animation: inkDot 2s ease-in-out infinite, pulseRing 2s ease-out infinite;
+  color: var(--l-cobalt);
+}
+
+/* Glass divider */
+.glass-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--l-border-hi), transparent
+  );
+  margin: 18px 0;
+  border: none;
+}
+
+/* =========================
+   INTERPRETATION BOX
+========================= */
+
+.interpretation-content {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.interpretation-content ul {
+    margin: 0;
+    padding-left: 22px;
+}
+
+.interpretation-content li {
+    padding-left: 6px;
+    margin-bottom: 8px;
+    line-height: 1.7;
+}
+
+@media (prefers-color-scheme: dark) {
+    .interpretation-content {
+        color: #cbd5e1;
+    }
+}
+
+
+/* =========================================================
+   FINAL OVERRIDE — LANDING PAGE PRESISI 1 HALAMAN
+   Tujuan: landing tidak scroll, card tidak nempel, tetap modern.
+   Letakkan di bagian paling bawah agar override semua style lama.
+========================================================= */
+
+/* Streamlit compact landing spacing */
+.block-container {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  max-width: 94% !important;
+}
+
+header[data-testid="stHeader"] {
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* Landing wrapper */
+.landing-wrapper {
+  max-width: 1180px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/* Main hero card dibuat lebih pendek dan diberi jarak ke card anggota */
+.landing-card {
+  padding: 12px 24px 16px 24px !important;
+  margin-bottom: 14px !important;
+  border-radius: 28px !important;
+}
+
+/* Border animasi tetap ada tapi tidak bikin card terlalu besar */
+.landing-card::before {
+  border-radius: 29px !important;
+}
+
+.landing-card::after {
+  border-radius: 27px !important;
+}
+
+/* Top campus bar dibuat compact */
+.top-campus-bar {
+  min-height: 50px !important;
+  padding: 6px 16px !important;
+  margin-bottom: 10px !important;
+  border-radius: 999px !important;
+}
+
+.campus-logo {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.campus-right {
+  font-size: 9.5px !important;
+  letter-spacing: 1.25px !important;
+}
+
+/* Title landing agar tetap besar tapi tidak makan tinggi */
+.landing-title-center {
+  padding: 2px 0 0 0 !important;
+}
+
+.project-title {
+  font-size: 32px !important;
+  line-height: 1.02 !important;
+  margin: 0 !important;
+  letter-spacing: -0.7px !important;
+}
+
+.project-subtitle {
+  font-size: 12px !important;
+  margin-top: 5px !important;
+  margin-bottom: 6px !important;
+}
+
+.group-badge {
+  padding: 6px 18px !important;
+  font-size: 9.5px !important;
+  margin: 6px 0 0 0 !important;
+}
+
+/* Card anggota tetap compact tapi foto jelas untuk presentasi */
+.member-card {
+  min-height: 150px !important;
+  padding: 12px 8px !important;
+  border-radius: 20px !important;
+  margin-top: 0 !important;
+}
+
+.member-card:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+}
+
+.member-photo {
+  width: 78px !important;
+  height: 78px !important;
+}
+
+.member-card:hover .member-photo {
+  transform: scale(1.07) rotate(2deg) !important;
+}
+
+.member-name {
+  font-size: 11.5px !important;
+  margin-top: 6px !important;
+  line-height: 1.2 !important;
+}
+
+.member-nim {
+  font-size: 9.5px !important;
+  margin-top: 2px !important;
+}
+
+/* Identity box dibuat compact */
+.identity-box {
+  padding: 10px 14px !important;
+  margin-top: 12px !important;
+  border-radius: 20px !important;
+}
+
+.identity-grid {
+  gap: 8px !important;
+}
+
+.identity-item {
+  padding: 8px 10px !important;
+  border-radius: 14px !important;
+}
+
+.identity-label {
+  font-size: 8.8px !important;
+  letter-spacing: 1px !important;
+}
+
+.identity-value {
+  font-size: 11.5px !important;
+  margin-top: 3px !important;
+  line-height: 1.2 !important;
+}
+
+/* Tombol lanjut login lebih compact */
+div[data-testid="stButton"] > button {
+  min-height: 40px !important;
+  margin-top: 6px !important;
+  border-radius: 16px !important;
+}
+
+/* Mencegah scroll horizontal */
+html,
+body {
+  overflow-x: hidden !important;
+}
+
+/* Khusus layar laptop tinggi kecil seperti 1366×768 */
+@media (max-height: 800px) {
+  .block-container {
+    padding-top: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
+    max-width: 92% !important;
+  }
+
+  .landing-card {
+    padding: 10px 22px 14px 22px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .top-campus-bar {
+    min-height: 46px !important;
+    padding: 5px 15px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .campus-logo {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .project-title {
+    font-size: 28px !important;
+    line-height: 1 !important;
+  }
+
+  .project-subtitle {
+    font-size: 11.5px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .group-badge {
+    padding: 5px 16px !important;
+    font-size: 9px !important;
+    margin-top: 5px !important;
+  }
+
+  .member-card {
+    min-height: 132px !important;
+    padding: 9px 7px !important;
+  }
+
+  .member-photo {
+    width: 66px !important;
+    height: 66px !important;
+  }
+
+  .member-name {
+    font-size: 11px !important;
+    margin-top: 5px !important;
+  }
+
+  .member-nim {
+    font-size: 9px !important;
+  }
+
+  .identity-box {
+    padding: 8px 12px !important;
+    margin-top: 10px !important;
+  }
+
+  .identity-item {
+    padding: 7px 8px !important;
+  }
+
+  .identity-label {
+    font-size: 8.5px !important;
+  }
+
+  .identity-value {
+    font-size: 11px !important;
+  }
+
+  div[data-testid="stButton"] > button {
+    min-height: 38px !important;
+    margin-top: 4px !important;
+  }
+}
+
+/* Ultra compact fallback kalau layar sangat pendek */
+@media (max-height: 700px) {
+  .project-title {
+    font-size: 24px !important;
+  }
+
+  .landing-card {
+    padding: 8px 18px 10px 18px !important;
+  }
+
+  .member-card {
+    min-height: 116px !important;
+    padding: 7px 6px !important;
+  }
+
+  .member-photo {
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .identity-box {
+    padding: 7px 10px !important;
+  }
+
+  .identity-item {
+    padding: 6px !important;
+  }
+}
+
+/* Mobile tetap aman */
+@media (max-width: 900px) {
+  .block-container {
+    max-width: 96% !important;
+  }
+
+  .landing-card {
+    padding: 14px 14px !important;
+  }
+
+  .top-campus-bar {
+    flex-direction: column !important;
+    gap: 5px !important;
+    border-radius: 22px !important;
+  }
+
+  .project-title {
+    font-size: 24px !important;
+  }
+
+  .identity-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* =========================================================
+   FINAL INTERPRETATION BOX FIX
+========================================================= */
+
+.interpretation-content {
+  margin-top: 10px !important;
+  font-size: 14px !important;
+  color: #334155 !important;
+  line-height: 1.7 !important;
+}
+
+.interpretation-content ul {
+  margin: 0 !important;
+  padding-left: 22px !important;
+}
+
+.interpretation-content li {
+  padding-left: 6px !important;
+  margin-bottom: 8px !important;
+  line-height: 1.7 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .interpretation-content {
+    color: #cbd5e1 !important;
+  }
+}
+
+/* =========================================================
+   FINAL SUPPORT — MANUAL DARK MODE APP.PY
+   Catatan:
+   - Toggle dark mode utama ada di app.py.
+   - CSS ini menjaga desain light mode, landing page, animasi,
+     dan fallback readability untuk dark mode.
+========================================================= */
+
+/* Light readability */
+.stApp,
+.main,
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"] {
+  color: var(--l-ink-1) !important;
+}
+
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp h5,
+.stApp h6 {
+  color: var(--l-ink-0) !important;
+}
+
+.member-name,
+.compact-kpi-value,
+.upload-kpi-value,
+.clean-kpi-value,
+.empty-kpi-value {
+  color: var(--l-ink-1) !important;
+}
+
+.compact-card-title,
+.upload-card-title,
+.clean-card-title,
+.empty-feature-title,
+.empty-section-title,
+.identity-value,
+.sidebar-user-name {
+  color: var(--l-cobalt) !important;
+}
+
+.project-subtitle,
+.login-subtitle,
+.member-nim,
+.identity-label,
+.sidebar-user-label,
+.compact-label,
+.compact-insight,
+.upload-desc,
+.clean-desc,
+.clean-kpi-label,
+.upload-kpi-label,
+.small-note,
+.empty-subtitle,
+.empty-feature-text,
+.empty-step-text,
+.empty-kpi-label {
+  color: #334155 !important;
+}
+
+.interpretation-content,
+.interpretation-content li,
+.interpretation-list-box,
+.interpretation-list-box *,
+.insight-box,
+.insight-box * {
+  color: #334155 !important;
+}
+
+.interpretation-content b,
+.interpretation-content strong,
+.insight-box b,
+.insight-box strong {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+/* Light AgGrid */
+.ag-theme-streamlit,
+.ag-root-wrapper {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #dbeafe !important;
+}
+
+.ag-header,
+.ag-header-row,
+.ag-paging-panel {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #dbeafe !important;
+}
+
+.ag-header-cell,
+.ag-header-cell-label,
+.ag-header-cell-text {
+  color: #0f172a !important;
+  background: #f8fafc !important;
+  font-weight: 900 !important;
+}
+
+.ag-row,
+.ag-row-even {
+  background: #ffffff !important;
+  color: #1e293b !important;
+}
+
+.ag-row-odd {
+  background: #fafafa !important;
+  color: #1e293b !important;
+}
+
+.ag-cell,
+.ag-cell-value {
+  color: #1e293b !important;
+  background: transparent !important;
+}
+
+.ag-row-hover,
+.ag-row:hover {
+  background: #eff6ff !important;
+}
+
+.ag-paging-panel *,
+.ag-paging-button,
+.ag-icon {
+  color: #334155 !important;
+}
+
+/* Manual dark fallback class kalau app.py menambahkan style inline */
+.manual-dark-fallback,
+.manual-dark-fallback * {
+  color: #e2e8f0 !important;
+}
+
+/* Dark fallback tetap ada untuk perangkat yang memang system dark */
+@media (prefers-color-scheme: dark) {
+  .interpretation-content,
+  .interpretation-content *,
+  .insight-box,
+  .insight-box * {
+    color: #f1f5f9 !important;
+  }
+
+  .interpretation-content b,
+  .interpretation-content strong,
+  .insight-box b,
+  .insight-box strong {
+    color: #ffffff !important;
+  }
+}
+
+/* Light chart area */
+.stPlotlyChart,
+.js-plotly-plot,
+.plot-container {
+  background: transparent !important;
+}
+
+/* Manual dark mode dikontrol dari app.py:
+   CSS ini hanya fallback untuk elemen yang sulit kena inline style */
+.manual-dark-fallback .stPlotlyChart,
+.manual-dark-fallback .js-plotly-plot,
+.manual-dark-fallback .plot-container {
+  background: #020617 !important;
+}
+
+/* Selectbox clean light */
+[data-baseweb="select"] > div {
+  border-radius: 12px !important;
+}
+
+/* AgGrid stronger readability */
+.ag-theme-streamlit .ag-header-cell-text {
+  font-weight: 900 !important;
+}
+
+.ag-theme-streamlit .ag-cell-value {
+  font-weight: 500 !important;
+}
+
+/* =========================================================
+   FINAL SAFE SIDEBAR DARK TOGGLE
+========================================================= */
+
+.theme-sidebar-box {
+  background: rgba(255,255,255,0.72) !important;
+  border: 1px solid rgba(26,86,232,0.18) !important;
+  border-radius: 16px !important;
+  padding: 10px 12px !important;
+  margin: 8px 0 8px 0 !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.08) !important;
+}
+
+.theme-sidebar-label {
+  color: #1e3a8a !important;
+  font-weight: 850 !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.3px !important;
+}
+
+[data-testid="stSidebar"] div[data-testid="stToggle"] {
+  background: rgba(255,255,255,0.72) !important;
+  border: 1px solid rgba(26,86,232,0.16) !important;
+  border-radius: 16px !important;
+  padding: 8px 10px !important;
+  margin-bottom: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.07) !important;
+}
+
+[data-testid="stSidebar"] div[data-testid="stToggle"] label,
+[data-testid="stSidebar"] div[data-testid="stToggle"] p,
+[data-testid="stSidebar"] div[data-testid="stToggle"] span,
+[data-testid="stSidebar"] div[data-testid="stToggle"] div {
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+[data-testid="stSidebar"] div[data-testid="stToggle"] label,
+[data-testid="stSidebar"] div[data-testid="stToggle"] p,
+[data-testid="stSidebar"] div[data-testid="stToggle"] span {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-sidebar-box,
+  [data-testid="stSidebar"] div[data-testid="stToggle"] {
+    background: rgba(15,23,42,0.88) !important;
+    border-color: rgba(96,165,250,0.30) !important;
+  }
+
+  .theme-sidebar-label,
+  [data-testid="stSidebar"] div[data-testid="stToggle"] label,
+  [data-testid="stSidebar"] div[data-testid="stToggle"] p,
+  [data-testid="stSidebar"] div[data-testid="stToggle"] span {
+    color: #f8fafc !important;
+  }
+}
+
+.stPlotlyChart,
+.js-plotly-plot,
+.plot-container {
+  border-radius: 12px !important;
+}
+
+.ag-theme-streamlit .ag-header-cell-text {
+  font-weight: 900 !important;
+}
+
+.ag-theme-streamlit .ag-cell-value {
+  font-weight: 500 !important;
+}
+
+/* =========================================================
+   FINAL DARK MODE FULL COMPONENT FIX + LANDING 4 FOTO
+========================================================= */
+
+/* Landing 4 foto, tetap satu halaman */
+.landing-wrapper {
+  max-width: 1180px !important;
+}
+
+.landing-card {
+  padding: 16px 26px 18px 26px !important;
+  margin-bottom: 16px !important;
+}
+
+.top-campus-bar {
+  min-height: 54px !important;
+  padding: 7px 18px !important;
+  margin-bottom: 12px !important;
+}
+
+.campus-right {
+  color: #0f172a !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.55px !important;
+}
+
+.campus-logo {
+  width: 58px !important;
+  height: 58px !important;
+}
+
+.project-title {
+  font-size: 34px !important;
+  line-height: 1.05 !important;
+  margin: 2px 0 4px 0 !important;
+}
+
+.project-subtitle {
+  font-size: 13px !important;
+  margin-bottom: 8px !important;
+}
+
+.group-badge {
+  margin: 8px 0 0 0 !important;
+}
+
+.member-card {
+  min-height: 158px !important;
+  padding: 14px 10px !important;
+}
+
+.member-photo {
+  width: 86px !important;
+  height: 86px !important;
+}
+
+.member-name {
+  font-size: 13px !important;
+  margin-top: 10px !important;
+}
+
+.member-nim {
+  font-size: 10.5px !important;
+}
+
+.identity-box {
+  margin-top: 14px !important;
+  padding: 12px 14px !important;
+}
+
+/* Tombol lanjut login turun sedikit */
+div[data-testid="stButton"] > button {
+  margin-top: 10px !important;
+}
+
+/* Upload area light */
+[data-testid="stFileUploader"],
+[data-testid="stFileUploaderDropzone"],
+section[data-testid="stFileUploaderDropzone"] {
+  border-radius: 16px !important;
+}
+
+/* AgGrid page size light */
+.ag-paging-panel,
+.ag-paging-panel *,
+.ag-paging-page-size,
+.ag-paging-page-size *,
+.ag-picker-field,
+.ag-picker-field * {
+  color: #334155 !important;
+}
+
+/* Dark fallback saat manual CSS dari app aktif */
+@media (prefers-color-scheme: dark) {
+  .campus-right {
+    color: #0f172a !important;
+  }
+}
+
+/* Untuk layar laptop 1366x768 */
+@media (max-height: 800px) {
+  .landing-card {
+    padding: 12px 22px 14px 22px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .campus-logo {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .project-title {
+    font-size: 30px !important;
+  }
+
+  .member-card {
+    min-height: 142px !important;
+    padding: 11px 8px !important;
+  }
+
+  .member-photo {
+    width: 74px !important;
+    height: 74px !important;
+  }
+
+  .identity-box {
+    margin-top: 10px !important;
+    padding: 10px 12px !important;
+  }
+
+  div[data-testid="stButton"] > button {
+    margin-top: 8px !important;
+    min-height: 40px !important;
+  }
+}
+
+/* =========================================================
+   FINAL FIX — PLOTLY TOOLTIP, AGGRID PAGE SIZE, LANDING WIDTH
+========================================================= */
+
+/* Landing: kotak hero atas dibuat lebih kecil agar jarak ke foto lebih presisi */
+.landing-wrapper {
+  max-width: 1060px !important;
+}
+
+.landing-card {
+  max-width: 1060px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 18px !important;
+}
+
+.top-campus-bar {
+  max-width: 980px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.identity-box {
+  max-width: 1060px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Foto card tetap 4 kolom rapi */
+.member-card {
+  max-width: 240px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Plotly tooltip / hover label dark mode */
+.stPlotlyChart .hoverlayer .hovertext,
+.stPlotlyChart .hoverlayer .hovertext path,
+.js-plotly-plot .hoverlayer .hovertext,
+.js-plotly-plot .hoverlayer .hovertext path {
+  fill: #0f172a !important;
+  stroke: rgba(96,165,250,0.44) !important;
+}
+
+.stPlotlyChart .hoverlayer .hovertext text,
+.js-plotly-plot .hoverlayer .hovertext text {
+  fill: #f8fafc !important;
+  color: #f8fafc !important;
+}
+
+/* Plotly modebar tetap dark */
+.stPlotlyChart .modebar,
+.js-plotly-plot .modebar {
+  background: rgba(15,23,42,0.75) !important;
+  border-radius: 10px !important;
+}
+
+.stPlotlyChart .modebar-btn path,
+.js-plotly-plot .modebar-btn path {
+  fill: #e2e8f0 !important;
+}
+
+/* AgGrid Page Size dropdown dan footer dark */
+.ag-paging-panel,
+.ag-paging-panel *,
+.ag-paging-page-size,
+.ag-paging-page-size *,
+.ag-picker-field,
+.ag-picker-field *,
+.ag-picker-field-wrapper,
+.ag-picker-field-wrapper *,
+.ag-select,
+.ag-select *,
+.ag-list,
+.ag-list *,
+.ag-popup,
+.ag-popup *,
+.ag-popup-child,
+.ag-popup-child * {
+  background-color: #020617 !important;
+  color: #f8fafc !important;
+  border-color: rgba(96,165,250,0.36) !important;
+}
+
+.ag-picker-field,
+.ag-picker-field-wrapper {
+  border: 1px solid rgba(96,165,250,0.36) !important;
+  border-radius: 9px !important;
+}
+
+.ag-icon,
+.ag-icon-small-down,
+.ag-icon-first,
+.ag-icon-previous,
+.ag-icon-next,
+.ag-icon-last {
+  color: #f8fafc !important;
+  fill: #f8fafc !important;
+}
+
+/* Kalau browser/light, page size tetap terang */
+@media (prefers-color-scheme: light) {
+  .ag-paging-panel,
+  .ag-paging-panel *,
+  .ag-paging-page-size,
+  .ag-paging-page-size *,
+  .ag-picker-field,
+  .ag-picker-field *,
+  .ag-picker-field-wrapper,
+  .ag-picker-field-wrapper * {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border-color: #dbeafe !important;
+  }
+}
+
+/* Laptop 1366x768: tetap muat satu layar */
+@media (max-height: 800px) {
+  .landing-wrapper {
+    max-width: 1040px !important;
+  }
+
+  .landing-card {
+    max-width: 1040px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .top-campus-bar {
+    max-width: 960px !important;
+  }
+
+  .member-card {
+    max-width: 230px !important;
+  }
+}
+
+
+/* Sidebar title naik sedikit */
+[data-testid="stSidebar"] > div:first-child {
+  padding-top: 1.2rem !important;
+}
+
+[data-testid="stSidebar"] h1 {
+  margin-top: -18px !important;
+  margin-bottom: 14px !important;
+}
+
+/* Jarak icon collapse ke judul tidak terlalu jauh */
+[data-testid="collapsedControl"] {
+  top: 0.8rem !important;
+}
+
+/* =========================================================
+   FINAL MODULAR UI PATCH
+   Dipakai bersama backend/theme.py dan frontend/static/js/script.js
+========================================================= */
+
+/* Sidebar title lebih naik dan presisi */
+[data-testid="stSidebar"] > div:first-child {
+  padding-top: 0.55rem !important;
+}
+
+[data-testid="stSidebar"] h1 {
+  margin-top: -30px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Toggle dark mode aman di sidebar */
+.theme-sidebar-box {
+  background: rgba(255,255,255,0.72) !important;
+  border: 1px solid rgba(26,86,232,0.18) !important;
+  border-radius: 16px !important;
+  padding: 10px 12px !important;
+  margin: 6px 0 8px 0 !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.08) !important;
+}
+
+.theme-sidebar-label {
+  color: #1e3a8a !important;
+  font-weight: 850 !important;
+  font-size: 12.5px !important;
+}
+
+[data-testid="stSidebar"] div[data-testid="stToggle"] {
+  background: rgba(255,255,255,0.72) !important;
+  border: 1px solid rgba(26,86,232,0.16) !important;
+  border-radius: 16px !important;
+  padding: 8px 10px !important;
+  margin-bottom: 14px !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.07) !important;
+}
+
+[data-testid="stSidebar"] div[data-testid="stToggle"] label,
+[data-testid="stSidebar"] div[data-testid="stToggle"] p,
+[data-testid="stSidebar"] div[data-testid="stToggle"] span,
+[data-testid="stSidebar"] div[data-testid="stToggle"] div {
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+[data-testid="stSidebar"] div[data-testid="stToggle"] label,
+[data-testid="stSidebar"] div[data-testid="stToggle"] p,
+[data-testid="stSidebar"] div[data-testid="stToggle"] span {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+/* Landing page 4 foto presisi */
+.landing-wrapper {
+  max-width: 1060px !important;
+}
+
+.landing-card {
+  max-width: 1060px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 18px !important;
+  padding: 16px 26px 18px 26px !important;
+}
+
+.top-campus-bar {
+  max-width: 980px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-height: 54px !important;
+}
+
+.campus-right {
+  color: #0f172a !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.55px !important;
+}
+
+.member-card {
+  max-width: 240px !important;
+  min-height: 158px !important;
+  padding: 14px 10px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.member-photo {
+  width: 86px !important;
+  height: 86px !important;
+}
+
+.identity-box {
+  max-width: 1060px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Copy button interpretasi dari script.js */
+.copy-interpretation-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+  color: white !important;
+  cursor: pointer;
+  font-size: 15px;
+  box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.copy-interpretation-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 26px rgba(37,99,235,0.35);
+}
+
+/* Plotly hover tooltip */
+.stPlotlyChart .hoverlayer .hovertext,
+.js-plotly-plot .hoverlayer .hovertext,
+.stPlotlyChart .hoverlayer .hovertext path,
+.js-plotly-plot .hoverlayer .hovertext path {
+  fill: #0f172a !important;
+  stroke: rgba(96,165,250,0.44) !important;
+}
+
+.stPlotlyChart .hoverlayer .hovertext text,
+.js-plotly-plot .hoverlayer .hovertext text {
+  fill: #f8fafc !important;
+  color: #f8fafc !important;
+}
+
+/* AgGrid Page Size / Dropdown */
+.ag-paging-panel,
+.ag-paging-panel *,
+.ag-paging-page-size,
+.ag-paging-page-size *,
+.ag-picker-field,
+.ag-picker-field *,
+.ag-picker-field-wrapper,
+.ag-picker-field-wrapper *,
+.ag-select,
+.ag-select *,
+.ag-list,
+.ag-list *,
+.ag-popup,
+.ag-popup *,
+.ag-popup-child,
+.ag-popup-child * {
+  background-color: #020617 !important;
+  color: #f8fafc !important;
+  border-color: rgba(96,165,250,0.36) !important;
+}
+
+.ag-picker-field,
+.ag-picker-field-wrapper {
+  border: 1px solid rgba(96,165,250,0.36) !important;
+  border-radius: 9px !important;
+}
+
+@media (prefers-color-scheme: light) {
+  .ag-paging-panel,
+  .ag-paging-panel *,
+  .ag-paging-page-size,
+  .ag-paging-page-size *,
+  .ag-picker-field,
+  .ag-picker-field *,
+  .ag-picker-field-wrapper,
+  .ag-picker-field-wrapper * {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+    border-color: #dbeafe !important;
+  }
+}
+
+@media (max-height: 800px) {
+  .landing-wrapper {
+    max-width: 1040px !important;
+  }
+
+  .landing-card {
+    max-width: 1040px !important;
+    margin-bottom: 14px !important;
+    padding: 12px 22px 14px 22px !important;
+  }
+
+  .top-campus-bar {
+    max-width: 960px !important;
+  }
+
+  .project-title {
+    font-size: 30px !important;
+  }
+
+  .member-card {
+    max-width: 230px !important;
+    min-height: 142px !important;
+  }
+
+  .member-photo {
+    width: 74px !important;
+    height: 74px !important;
+  }
+}
+.member-card-clickable,
+.identity-item-clickable {
+    cursor: pointer;
+    transition: all 0.28s ease;
+}
+
+.member-card-clickable:hover,
+.identity-item-clickable:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 14px 30px rgba(0, 180, 255, 0.18);
+    border-color: rgba(0, 220, 255, 0.45);
+}
+
+.zoom-panel {
+    margin: 18px auto 20px auto;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 28px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(4,20,40,0.95), rgba(10,30,70,0.92));
+    border: 1px solid rgba(0, 220, 255, 0.25);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.35),
+        0 0 40px rgba(0, 170, 255, 0.16);
+    animation: fadeUp 0.35s ease;
+}
+
+.zoom-panel-left {
+    flex: 0 0 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-photo {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(160, 235, 255, 0.9);
+    box-shadow: 0 0 28px rgba(0, 200, 255, 0.22);
+}
+
+.zoom-panel-right {
+    flex: 1;
+}
+
+.zoom-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(90deg, #59f0d0, #f472b6, #7dd3fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.zoom-subtitle {
+    font-size: 15px;
+    color: #9bdaf5;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.zoom-description {
+    font-size: 15px;
+    color: #dbeafe;
+    line-height: 1.7;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 16px;
+    border-radius: 16px;
+}
+
+.member-photo-fallback {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dbeafe;
+    color: #1e3a8a;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+@media (max-width: 900px) {
+    .zoom-panel {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .zoom-photo {
+        width: 130px;
+        height: 130px;
+    }
+
+    .zoom-title {
+        font-size: 24px;
+    }
+}
+
+.member-card-clickable,
+.identity-item-clickable {
+    cursor: pointer;
+    transition: all 0.28s ease;
+}
+
+.member-card-clickable:hover,
+.identity-item-clickable:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 14px 30px rgba(0, 180, 255, 0.18);
+    border-color: rgba(0, 220, 255, 0.45);
+}
+
+.zoom-panel {
+    margin: 18px auto 20px auto;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 28px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(4,20,40,0.95), rgba(10,30,70,0.92));
+    border: 1px solid rgba(0, 220, 255, 0.25);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.35),
+        0 0 40px rgba(0, 170, 255, 0.16);
+    animation: fadeUp 0.35s ease;
+}
+
+.zoom-panel-left {
+    flex: 0 0 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-photo {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(160, 235, 255, 0.9);
+    box-shadow: 0 0 28px rgba(0, 200, 255, 0.22);
+}
+
+.zoom-photo-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    background: rgba(255,255,255,0.08);
+}
+
+.zoom-panel-right {
+    flex: 1;
+}
+
+.zoom-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(90deg, #59f0d0, #f472b6, #7dd3fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.zoom-subtitle {
+    font-size: 15px;
+    color: #9bdaf5;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.zoom-description {
+    font-size: 15px;
+    color: #dbeafe;
+    line-height: 1.7;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 16px;
+    border-radius: 16px;
+}
+
+
+/* ==========================================================
+   GLOBAL TEXT READABILITY OVERRIDE FINAL
+   Paste di PALING BAWAH frontend/static/css/style.css
+   Tujuan: semua tulisan di dashboard terlihat jelas dan tidak samar.
+   ========================================================== */
+
+/* 1) Semua tulisan utama di area halaman */
+section.main,
+section.main *,
+.main,
+.main *,
+div[data-testid="stAppViewContainer"],
+div[data-testid="stAppViewContainer"] * {
+    text-shadow: none !important;
+}
+
+/* 2) Markdown, paragraf, bullet, caption, dan text biasa */
+section.main div[data-testid="stMarkdownContainer"],
+section.main div[data-testid="stMarkdownContainer"] p,
+section.main div[data-testid="stMarkdownContainer"] span,
+section.main div[data-testid="stMarkdownContainer"] div,
+section.main div[data-testid="stMarkdownContainer"] li,
+section.main p,
+section.main li,
+section.main span {
+    color: #EAF6FF !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* 3) Heading besar seperti File Summary, Upload Data, Dataset Information */
+section.main h1,
+section.main h2,
+section.main h3,
+section.main h4,
+section.main .section-title,
+section.main .section-title *,
+section.main .subsection-title,
+section.main .subsection-title * {
+    color: #67E8F9 !important;
+    opacity: 1 !important;
+    font-weight: 1000 !important;
+    filter: none !important;
+    text-shadow: 0 0 12px rgba(103, 232, 249, .28) !important;
+}
+
+/* 4) Teks penting/bold */
+section.main strong,
+section.main b,
+section.main label,
+section.main label * {
+    color: #FFFFFF !important;
+    opacity: 1 !important;
+    font-weight: 900 !important;
+}
+
+/* 5) Card umum di dashboard */
+section.main .db-card,
+section.main .bi-card,
+section.main .info-card,
+section.main .quick-card,
+section.main .health-card,
+section.main .widget-card,
+section.main .db-kpi,
+section.main .inv-metric,
+section.main .inv-panel,
+section.main .inv-card,
+section.main div[data-testid="stVerticalBlockBorderWrapper"] {
+    color: #EAF6FF !important;
+}
+
+/* 6) Isi card dan KPI agar tidak gelap/samar */
+section.main .db-card *,
+section.main .bi-card *,
+section.main .info-card *,
+section.main .quick-card *,
+section.main .health-card *,
+section.main .widget-card *,
+section.main .db-kpi *,
+section.main .inv-metric *,
+section.main .inv-panel *,
+section.main .inv-card *,
+section.main div[data-testid="stVerticalBlockBorderWrapper"] * {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* 7) Label kecil dalam card seperti Rows, Columns, Format, File Size */
+section.main .db-kpi-label,
+section.main .db-kpi-value,
+section.main .bi-kpi-label,
+section.main .bi-kpi-value,
+section.main .inv-metric-title,
+section.main .inv-metric-value,
+section.main .inv-metric-sub,
+section.main .metric-label,
+section.main .metric-value {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+section.main .db-kpi-label,
+section.main .bi-kpi-label,
+section.main .inv-metric-title,
+section.main .metric-label {
+    color: #BFEFFF !important;
+    font-weight: 900 !important;
+}
+
+section.main .db-kpi-value,
+section.main .bi-kpi-value,
+section.main .inv-metric-value,
+section.main .metric-value {
+    color: #FFFFFF !important;
+    font-weight: 1000 !important;
+}
+
+/* 8) Khusus halaman Upload/Data Management agar File Summary terlihat */
+section.main [class*="summary"],
+section.main [class*="summary"] *,
+section.main [class*="file"],
+section.main [class*="file"] *,
+section.main [class*="upload"],
+section.main [class*="upload"] *,
+section.main [class*="dataset"],
+section.main [class*="dataset"] * {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+section.main [class*="summary"] h1,
+section.main [class*="summary"] h2,
+section.main [class*="summary"] h3,
+section.main [class*="summary"] h4,
+section.main [class*="file"] h1,
+section.main [class*="file"] h2,
+section.main [class*="file"] h3,
+section.main [class*="file"] h4,
+section.main [class*="upload"] h1,
+section.main [class*="upload"] h2,
+section.main [class*="upload"] h3,
+section.main [class*="upload"] h4 {
+    color: #67E8F9 !important;
+}
+
+/* 9) Success / Info / Warning box */
+section.main div[data-testid="stAlert"],
+section.main div[data-testid="stAlert"] *,
+section.main .stAlert,
+section.main .stAlert * {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+section.main div[data-testid="stAlert"] p,
+section.main div[data-testid="stAlert"] span,
+section.main div[data-testid="stAlert"] div {
+    color: #F8FAFC !important;
+    font-weight: 800 !important;
+}
+
+/* 10) Tabel/Dataframe agar teks terbaca */
+section.main div[data-testid="stDataFrame"],
+section.main div[data-testid="stDataFrame"] * {
+    color: #F8FAFC !important;
+    opacity: 1 !important;
+}
+
+/* 11) Form input/selectbox/search */
+section.main input,
+section.main textarea,
+section.main div[data-baseweb="select"] *,
+section.main div[data-baseweb="input"] *,
+section.main div[data-baseweb="textarea"] * {
+    color: #F8FAFC !important;
+    opacity: 1 !important;
+}
+
+/* 12) Button text */
+section.main button,
+section.main button * {
+    color: #67E8F9 !important;
+    opacity: 1 !important;
+    font-weight: 850 !important;
+}
+
+/* 13) Sidebar tetap jelas */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] * {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] div,
+section[data-testid="stSidebar"] label {
+    color: #EAF6FF !important;
+}
+
+/* 14) Hindari teks jadi terlalu gelap karena class muted */
+section.main .muted,
+section.main .text-muted,
+section.main .secondary,
+section.main .caption,
+section.main small,
+section.main [class*="muted"],
+section.main [class*="secondary"],
+section.main [class*="caption"] {
+    color: #CDEFFF !important;
+    opacity: 1 !important;
+}
+
+/* 15) Paksa tulisan dalam blok HTML custom tetap terang */
+section.main div[style*="color"],
+section.main span[style*="color"],
+section.main p[style*="color"] {
+    color: #EAF6FF !important;
+    opacity: 1 !important;
+}
