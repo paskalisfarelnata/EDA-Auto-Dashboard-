@@ -50,7 +50,126 @@ from backend.chart_interpretation import (
 )
 
 
+
+def inject_insight_full_width_css():
+    st.markdown(
+        """
+        <style>
+            /* =====================================================
+               INSIGHT FULL WIDTH FINAL
+               Merapikan ruang kosong kiri-kanan khusus halaman
+               Intelligent Insight Generator tanpa mengubah logic lama.
+               ===================================================== */
+
+            .main .block-container,
+            section.main .block-container,
+            div[data-testid="stMainBlockContainer"],
+            div[data-testid="stAppViewContainer"] .block-container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                padding-top: 0.75rem !important;
+                padding-bottom: 1rem !important;
+                box-sizing: border-box !important;
+            }
+
+            section.main div[data-testid="stVerticalBlock"],
+            section.main div[data-testid="stVerticalBlock"] > div {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            section.main div[data-testid="stHorizontalBlock"] {
+                width: 100% !important;
+                max-width: 100% !important;
+                gap: 1rem !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Judul halaman insight dibuat melebar rapi */
+            section.main .section-title {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Box insight utama memenuhi lebar area konten */
+            section.main .insight-box {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                margin-bottom: 1.05rem !important;
+                padding: 1.55rem 1.75rem !important;
+                box-sizing: border-box !important;
+                border-radius: 24px !important;
+                background:
+                    linear-gradient(135deg, rgba(8, 20, 38, .98), rgba(15, 23, 42, .96)) !important;
+                border: 1px solid rgba(103, 232, 249, .22) !important;
+                box-shadow: 0 16px 34px rgba(0, 0, 0, .20) !important;
+            }
+
+            section.main .insight-box h4 {
+                color: #FFFFFF !important;
+                opacity: 1 !important;
+                font-weight: 1000 !important;
+                letter-spacing: .04em !important;
+                line-height: 1.25 !important;
+            }
+
+            section.main .insight-box div,
+            section.main .insight-box p,
+            section.main .insight-box span,
+            section.main .insight-box li {
+                color: #EAF6FF !important;
+                opacity: 1 !important;
+                filter: none !important;
+                text-shadow: none !important;
+                font-weight: 700 !important;
+            }
+
+            /* Supaya teks panjang tidak membuat card terasa sempit */
+            section.main .insight-box div[style*="line-height"] {
+                width: 100% !important;
+                max-width: 100% !important;
+                line-height: 1.75 !important;
+                font-size: 17px !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Override class atau style lama yang membatasi lebar */
+            section.main [class*="insight"],
+            section.main [class*="Insight"] {
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            @media (max-width: 900px) {
+                .main .block-container,
+                section.main .block-container,
+                div[data-testid="stMainBlockContainer"] {
+                    padding-left: 0.75rem !important;
+                    padding-right: 0.75rem !important;
+                }
+
+                section.main .insight-box {
+                    padding: 1.1rem 1.05rem !important;
+                    border-radius: 18px !important;
+                }
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+
 def show_insight_generator_page(df, file_name, file_ext, file_size, saved_file_path, numeric_cols, categorical_cols, date_cols, num_stats, cat_stats, insights, save_visualizations, render_summary_interpretation, calculate_health_score, get_health_label):
+    inject_insight_full_width_css()
     st.markdown(
         '<div class="section-title">🧠 Intelligent Insight Generator</div>',
         unsafe_allow_html=True
