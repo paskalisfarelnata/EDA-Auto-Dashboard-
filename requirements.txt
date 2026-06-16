@@ -1,0 +1,16 @@
+streamlit
+pandas
+numpy
+scipy
+plotly
+matplotlib
+seaborn
+openpyxl
+xlsxwriter
+streamlit-aggrid
+statsmodels
+kaleido
+fpdf2
+reportlab
+xhtml2pdf
+jinja2
