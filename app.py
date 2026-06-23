@@ -1,6 +1,7 @@
 import os
 import re
 import time
+from urllib.parse import quote
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
@@ -106,67 +107,217 @@ def load_js():
         pass
 
 
-def fix_file_summary_title_color():
-    # Khusus memperbaiki warna judul "File Summary" saja.
-    # Tidak mengubah layout, ukuran card, halaman lain, atau logic aplikasi.
-    st.markdown(
-        """
-        <style>
-            /* Target heading markdown Streamlit untuk File Summary */
-            section.main div[data-testid="stMarkdownContainer"] h1[id="file-summary"],
-            section.main div[data-testid="stMarkdownContainer"] h2[id="file-summary"],
-            section.main div[data-testid="stMarkdownContainer"] h3[id="file-summary"],
-            section.main div[data-testid="stMarkdownContainer"] h4[id="file-summary"],
-            section.main div[data-testid="stMarkdownContainer"] h1:has(a[href="#file-summary"]),
-            section.main div[data-testid="stMarkdownContainer"] h2:has(a[href="#file-summary"]),
-            section.main div[data-testid="stMarkdownContainer"] h3:has(a[href="#file-summary"]),
-            section.main div[data-testid="stMarkdownContainer"] h4:has(a[href="#file-summary"]) {
-                color: #FFFFFF !important;
-                -webkit-text-fill-color: #FFFFFF !important;
-                opacity: 1 !important;
-                filter: none !important;
-                font-weight: 1000 !important;
-                text-shadow: 0 0 14px rgba(103, 232, 249, 0.30) !important;
-            }
-
-            /* Isi teks di dalam heading File Summary */
-            section.main div[data-testid="stMarkdownContainer"] h1[id="file-summary"] *,
-            section.main div[data-testid="stMarkdownContainer"] h2[id="file-summary"] *,
-            section.main div[data-testid="stMarkdownContainer"] h3[id="file-summary"] *,
-            section.main div[data-testid="stMarkdownContainer"] h4[id="file-summary"] *,
-            section.main div[data-testid="stMarkdownContainer"] h1:has(a[href="#file-summary"]) *,
-            section.main div[data-testid="stMarkdownContainer"] h2:has(a[href="#file-summary"]) *,
-            section.main div[data-testid="stMarkdownContainer"] h3:has(a[href="#file-summary"]) *,
-            section.main div[data-testid="stMarkdownContainer"] h4:has(a[href="#file-summary"]) * {
-                color: #FFFFFF !important;
-                -webkit-text-fill-color: #FFFFFF !important;
-                opacity: 1 !important;
-                filter: none !important;
-            }
-
-            /* Icon link kecil di samping File Summary tetap abu agar tidak mengganggu */
-            section.main div[data-testid="stMarkdownContainer"] h1[id="file-summary"] a,
-            section.main div[data-testid="stMarkdownContainer"] h2[id="file-summary"] a,
-            section.main div[data-testid="stMarkdownContainer"] h3[id="file-summary"] a,
-            section.main div[data-testid="stMarkdownContainer"] h4[id="file-summary"] a,
-            section.main div[data-testid="stMarkdownContainer"] h1:has(a[href="#file-summary"]) a,
-            section.main div[data-testid="stMarkdownContainer"] h2:has(a[href="#file-summary"]) a,
-            section.main div[data-testid="stMarkdownContainer"] h3:has(a[href="#file-summary"]) a,
-            section.main div[data-testid="stMarkdownContainer"] h4:has(a[href="#file-summary"]) a {
-                color: #94A3B8 !important;
-                -webkit-text-fill-color: #94A3B8 !important;
-                opacity: 0.85 !important;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-
-
 load_css()
 load_js()
-fix_file_summary_title_color()
+
+
+# =========================
+# CLEAN MANUAL THEME
+# =========================
+def apply_clean_manual_theme():
+    """
+    Theme yang bersih dan tidak saling tabrak.
+    - Dark mode: background gelap, teks terang.
+    - Light mode: background terang, teks gelap.
+    - Tidak memaksa semua style secara berlebihan.
+    """
+    is_dark = bool(st.session_state.get("manual_dark_mode", False))
+
+    if is_dark:
+        st.markdown(
+            """
+            <style>
+                :root { color-scheme: dark; }
+
+                .stApp,
+                .main,
+                [data-testid="stAppViewContainer"],
+                [data-testid="stMain"],
+                [data-testid="stMainBlockContainer"],
+                .block-container {
+                    background:
+                        radial-gradient(circle at 8% 0%, rgba(56,189,248,.10), transparent 30%),
+                        radial-gradient(circle at 92% 8%, rgba(167,139,250,.11), transparent 32%),
+                        linear-gradient(135deg, #020617 0%, #0f172a 58%, #111827 100%) !important;
+                    color: #f8fafc !important;
+                }
+
+                .stApp,
+                .stApp p,
+                .stApp span,
+                .stApp label,
+                .stApp li,
+                .stMarkdown,
+                .stMarkdown *,
+                [data-testid="stMarkdownContainer"],
+                [data-testid="stMarkdownContainer"] * {
+                    color: #e2e8f0 !important;
+                }
+
+                .stApp h1,
+                .stApp h2,
+                .stApp h3,
+                .stApp h4,
+                .stApp h5,
+                .stApp h6,
+                .stApp strong,
+                .stApp b {
+                    color: #ffffff !important;
+                }
+
+                .section-title,
+                .section-title *,
+                .stButton > button,
+                .stButton > button *,
+                div[data-testid="stButton"] > button,
+                div[data-testid="stButton"] > button * {
+                    color: #ffffff !important;
+                }
+
+                [data-testid="stSidebar"],
+                [data-testid="stSidebar"] > div {
+                    background: linear-gradient(180deg, #020617, #0f172a) !important;
+                    color: #e2e8f0 !important;
+                }
+
+                [data-testid="stSidebar"] *,
+                [data-testid="stSidebar"] label,
+                [data-testid="stSidebar"] span,
+                [data-testid="stSidebar"] p {
+                    color: #e2e8f0 !important;
+                }
+
+                input,
+                textarea,
+                select,
+                [data-baseweb="select"] > div,
+                [data-baseweb="input"] > div {
+                    background: rgba(15,23,42,.92) !important;
+                    color: #f8fafc !important;
+                    border-color: rgba(96,165,250,.35) !important;
+                }
+
+                [data-baseweb="select"] *,
+                [data-baseweb="popover"] *,
+                [role="listbox"] *,
+                [role="option"] * {
+                    color: #f8fafc !important;
+                }
+
+                [data-baseweb="popover"],
+                [role="listbox"] {
+                    background: #0f172a !important;
+                }
+
+                .ag-theme-streamlit,
+                .ag-root-wrapper,
+                .ag-root,
+                .ag-body,
+                .ag-row,
+                .ag-row-even,
+                .ag-row-odd,
+                [data-testid="stDataFrame"],
+                [data-testid="stTable"],
+                table {
+                    background: #0f172a !important;
+                    color: #f8fafc !important;
+                    border-color: rgba(96,165,250,.25) !important;
+                }
+
+                .ag-header,
+                .ag-header-row,
+                .ag-header-cell,
+                .ag-paging-panel,
+                th {
+                    background: #1e293b !important;
+                    color: #f8fafc !important;
+                }
+
+                .ag-cell,
+                .ag-cell-value,
+                .ag-header-cell-text,
+                .ag-paging-panel *,
+                .ag-icon,
+                table * {
+                    color: #f8fafc !important;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.markdown(
+            """
+            <style>
+                :root { color-scheme: light; }
+
+                .stApp,
+                .main,
+                [data-testid="stAppViewContainer"],
+                [data-testid="stMain"],
+                [data-testid="stMainBlockContainer"],
+                .block-container {
+                    color: #0f172a !important;
+                }
+
+                .stApp p,
+                .stApp span,
+                .stApp label,
+                .stApp li,
+                .stMarkdown,
+                .stMarkdown *,
+                [data-testid="stMarkdownContainer"],
+                [data-testid="stMarkdownContainer"] * {
+                    color: #334155 !important;
+                }
+
+                .stApp h1,
+                .stApp h2,
+                .stApp h3,
+                .stApp h4,
+                .stApp h5,
+                .stApp h6,
+                .stApp strong,
+                .stApp b {
+                    color: #0f172a !important;
+                }
+
+                .section-title,
+                .section-title *,
+                .stButton > button,
+                .stButton > button *,
+                div[data-testid="stButton"] > button,
+                div[data-testid="stButton"] > button * {
+                    color: #ffffff !important;
+                }
+
+                [data-testid="stSidebar"] *,
+                [data-testid="stSidebar"] label,
+                [data-testid="stSidebar"] span,
+                [data-testid="stSidebar"] p {
+                    color: #0f172a !important;
+                }
+
+                input,
+                textarea,
+                select,
+                [data-baseweb="select"] *,
+                [data-baseweb="input"] * {
+                    color: #0f172a !important;
+                }
+
+                .ag-cell,
+                .ag-cell-value,
+                .ag-header-cell-text,
+                .ag-paging-panel *,
+                .ag-icon,
+                table * {
+                    color: #0f172a !important;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
 
 
 
@@ -300,10 +451,6 @@ if "auth_page" not in st.session_state:
 if "logged_user" not in st.session_state:
     st.session_state.logged_user = None
 
-if "manual_dark_mode" not in st.session_state:
-    st.session_state.manual_dark_mode = False
-
-
 def go_to(page_name):
     st.session_state.page = page_name
 
@@ -356,17 +503,138 @@ def nav_button(label, target_page, icon=""):
 
 
 # =========================
+# MINI SIDEBAR ICONS WHEN COLLAPSED
+# =========================
+def handle_collapsed_sidebar_navigation():
+    """Tidak dipakai lagi. Mini sidebar sekarang memakai st.button supaya tidak reload ke login."""
+    return
+
+
+def render_collapsed_sidebar_icons():
+    """Mini sidebar saat sidebar utama ditutup.
+
+    Perilaku:
+    - Rail ikon selalu tetap dan tidak menggeser konten dashboard.
+    - Ikon bab mempunyai posisi tetap di tengah rail.
+    - Klik ikon bab membuka submenu ke bawah, bukan ke samping.
+    - Ikon anak bab lebih kecil, rapi, dan berada di tengah jalur submenu.
+    - Bab tanpa anak bab langsung membuka halamannya.
+    """
+    if not st.session_state.get("is_logged_in", False):
+        return
+
+    if "mini_open_group_v3" not in st.session_state:
+        st.session_state.mini_open_group_v3 = None
+
+    active_group = get_active_group()
+
+    mini_items = [
+        {
+            "icon": "🏠", "label": "Dashboard", "target": "Dashboard", "group": "Dashboard",
+            "children": []
+        },
+        {
+            "icon": "📁", "label": "Data Management", "target": "Upload Data", "group": "Data Management",
+            "children": [
+                {"icon": "📤", "label": "Upload Data", "target": "Upload Data"},
+                {"icon": "📄", "label": "File Information", "target": "File Information"},
+                {"icon": "👁️", "label": "Data Preview", "target": "Data Preview"},
+                {"icon": "📌", "label": "Dataset Information", "target": "Dataset Information"},
+                {"icon": "🧹", "label": "Data Cleaning", "target": "Data Cleaning"},
+            ],
+        },
+        {
+            "icon": "📊", "label": "Descriptive Statistics", "target": "Numerical Variables", "group": "Descriptive Statistics",
+            "children": [
+                {"icon": "🔢", "label": "Numerical Variables", "target": "Numerical Variables"},
+                {"icon": "🏷️", "label": "Categorical Variables", "target": "Categorical Variables"},
+            ],
+        },
+        {
+            "icon": "📈", "label": "Visualization Analytics", "target": "Numerical Visualization", "group": "Visualization Analytics",
+            "children": [
+                {"icon": "📈", "label": "Numerical Visualization", "target": "Numerical Visualization"},
+                {"icon": "📊", "label": "Categorical Visualization", "target": "Categorical Visualization"},
+                {"icon": "🔗", "label": "Bivariate & Multivariate Analysis", "target": "Bivariate & Multivariate Analysis"},
+                {"icon": "📌", "label": "Categorical vs Numerical Analysis", "target": "Categorical vs Numerical Analysis"},
+                {"icon": "⏱️", "label": "Time Series Analytics", "target": "Time Series Analytics"},
+            ],
+        },
+        {
+            "icon": "🧠", "label": "Intelligent Insight Generator", "target": "Intelligent Insight Generator", "group": "Intelligent Insight Generator",
+            "children": []
+        },
+        {
+            "icon": "📄", "label": "Reporting System", "target": "Download Report PDF", "group": "Reporting System",
+            "children": [
+                {"icon": "📄", "label": "Download Report PDF", "target": "Download Report PDF"},
+                {"icon": "🌐", "label": "Download HTML Dashboard", "target": "Download HTML Dashboard"},
+                {"icon": "📦", "label": "Export Result to Excel/CSV", "target": "Export Result to Excel/CSV"},
+            ],
+        },
+    ]
+
+    with st.container(key="mini_sidebar_rail_native"):
+        st.markdown(
+            '<div class="mini-sidebar-brand-native" title="Auto EDA Analytics">📊</div>',
+            unsafe_allow_html=True,
+        )
+
+        for item in mini_items:
+            children = item.get("children", [])
+            has_children = bool(children)
+            is_active = active_group == item["group"]
+            is_open = st.session_state.mini_open_group_v3 == item["group"]
+            item_key = safe_name(item["group"])
+
+            with st.container(key=f"mini_item_{item_key}"):
+                if has_children:
+                    parent_help = (
+                        f"{item['label']} — klik untuk "
+                        f"{'menutup' if is_open else 'membuka'} submenu"
+                    )
+                else:
+                    parent_help = item["label"]
+
+                if st.button(
+                    item["icon"],
+                    key=f"mini_parent_{item_key}",
+                    help=parent_help,
+                    use_container_width=False,
+                    type="primary" if (is_active or is_open) else "secondary",
+                ):
+                    if has_children:
+                        st.session_state.mini_open_group_v3 = (
+                            None if is_open else item["group"]
+                        )
+                    else:
+                        st.session_state.mini_open_group_v3 = None
+                        go_to(item["target"])
+
+                    st.rerun()
+
+                if has_children and is_open:
+                    with st.container(key=f"mini_child_{item_key}"):
+                        for child in children:
+                            child_active = st.session_state.page == child["target"]
+
+                            if st.button(
+                                child["icon"],
+                                key=f"mini_child_nav_{item_key}_{safe_name(child['target'])}",
+                                help=child["label"],
+                                use_container_width=False,
+                                type="primary" if child_active else "secondary",
+                            ):
+                                st.session_state.mini_open_group_v3 = item["group"]
+                                go_to(child["target"])
+                                st.rerun()
+
+
+# =========================
 # SIDEBAR THEME TOGGLE
 # =========================
 with st.sidebar:
     st.title("📊 Auto EDA Analytics")
-
-    if st.session_state.get("is_logged_in", False):
-        st.toggle(
-            "🌙 Dark Mode",
-            key="manual_dark_mode",
-            help="Klik untuk mengubah tampilan dashboard ke mode gelap/terang"
-        )
 
     active_group = get_active_group()
 
@@ -419,6 +687,10 @@ if st.session_state.get("is_logged_in"):
         logout()
         st.rerun()
 
+
+
+handle_collapsed_sidebar_navigation()
+render_collapsed_sidebar_icons()
 
 page = st.session_state.page
 
@@ -534,3 +806,4 @@ else:
 
     elif page == "Export Result to Excel/CSV":
         show_export_excel_csv_page(*common_args)
+
