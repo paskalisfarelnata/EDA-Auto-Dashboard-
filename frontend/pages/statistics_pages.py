@@ -50,8 +50,76 @@ from backend.chart_interpretation import (
 )
 
 
+# =====================================================
+# STATISTICS PAGE DARK THEME
+# =====================================================
+def inject_statistics_page_css():
+    st.markdown(
+        """
+        <style>
+            section.main div[data-testid="stMarkdownContainer"],
+            section.main div[data-testid="stMarkdownContainer"] *,
+            section.main p,
+            section.main li,
+            section.main span,
+            section.main label {
+                color: #EAF6FF !important;
+                opacity: 1 !important;
+            }
+            .section-title,
+            .section-title * {
+                color: #FFFFFF !important;
+                opacity: 1 !important;
+                font-weight: 1000 !important;
+            }
+            div[data-testid="stDataFrame"],
+            div[data-testid="stTable"] {
+                border-radius: 16px !important;
+                overflow: hidden !important;
+                border: 1px solid rgba(103, 232, 249, .22) !important;
+                box-shadow: 0 14px 34px rgba(0, 0, 0, .22) !important;
+            }
+            .ag-theme-streamlit,
+            .ag-root-wrapper,
+            .ag-root,
+            .ag-body,
+            .ag-center-cols-container,
+            .ag-row,
+            .ag-row-even,
+            .ag-row-odd {
+                background: #0F172A !important;
+                color: #EAF6FF !important;
+                border-color: rgba(103, 232, 249, .18) !important;
+            }
+            .ag-header,
+            .ag-header-row,
+            .ag-header-cell,
+            .ag-paging-panel {
+                background: #1E293B !important;
+                color: #FFFFFF !important;
+                border-color: rgba(103, 232, 249, .18) !important;
+            }
+            .ag-cell,
+            .ag-cell-value,
+            .ag-header-cell-text,
+            .ag-paging-panel *,
+            .ag-icon {
+                color: #EAF6FF !important;
+                opacity: 1 !important;
+            }
+            div[data-testid="stAlert"] *,
+            div[data-testid="stWarning"] * {
+                color: #F8FAFC !important;
+                opacity: 1 !important;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
 
 def show_numerical_variables_page(df, file_name, file_ext, file_size, saved_file_path, numeric_cols, categorical_cols, date_cols, num_stats, cat_stats, insights, save_visualizations, render_summary_interpretation, calculate_health_score, get_health_label):
+    inject_statistics_page_css()
     st.markdown('<div class="section-title">📊 Numerical Variables Statistics</div>', unsafe_allow_html=True)
 
     if len(num_stats) > 0:
@@ -63,6 +131,7 @@ def show_numerical_variables_page(df, file_name, file_ext, file_size, saved_file
 
 
 def show_categorical_variables_page(df, file_name, file_ext, file_size, saved_file_path, numeric_cols, categorical_cols, date_cols, num_stats, cat_stats, insights, save_visualizations, render_summary_interpretation, calculate_health_score, get_health_label):
+    inject_statistics_page_css()
     st.markdown('<div class="section-title">🏷️ Categorical Variables Statistics</div>', unsafe_allow_html=True)
 
     if len(cat_stats) > 0:
