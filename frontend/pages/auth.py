@@ -223,7 +223,7 @@ def inject_click_profile_css():
                 margin-bottom: 14px;
             }
             .profile-modal-desc {
-                color: #e2e8f0;
+                color: inherit;
                 line-height: 1.7;
                 background: rgba(255,255,255,.06);
                 border: 1px solid rgba(255,255,255,.08);
@@ -389,7 +389,7 @@ def inject_click_profile_css():
                 margin: 7px auto 5px;
                 padding: 4px 10px;
                 border-radius: 999px;
-                color: #67e8f9;
+                color: inherit;
                 background: linear-gradient(135deg, rgba(8, 145, 178, .16), rgba(88, 28, 135, .18));
                 border: 1px solid rgba(34, 211, 238, .23);
                 box-shadow: 0 0 16px rgba(34, 211, 238, .06);
@@ -515,6 +515,27 @@ def inject_click_profile_css():
                     width: 140px;
                     height: 140px;
                 }
+            }
+
+
+            /* FINAL AUTH THEME FIX */
+            .login-card,
+            .landing-card,
+            .identity-box,
+            .member-card {
+                color: inherit !important;
+            }
+
+            .login-subtitle,
+            .project-subtitle,
+            .member-nim,
+            .identity-label {
+                color: rgba(226, 232, 240, 0.88) !important;
+            }
+
+            .member-name,
+            .identity-value {
+                color: #f8fafc !important;
             }
         </style>
         """,
@@ -664,14 +685,8 @@ def show_landing_page():
                 height: 0 !important;
             }
             html,
-            body,
-            .stApp,
-            [data-testid="stAppViewContainer"],
-            [data-testid="stAppViewContainer"] > .main,
-            section.main {
-                overflow: hidden !important;
-                height: 100vh !important;
-                max-height: 100vh !important;
+            body {
+                overflow-x: hidden !important;
             }
             .block-container,
             div[data-testid="stMainBlockContainer"] {
@@ -725,6 +740,8 @@ def show_landing_page():
     ])
     st.markdown(landing_header_html, unsafe_allow_html=True)
     member_cols = st.columns(4)
+    
+
     for i, (col, member) in enumerate(zip(member_cols, TEAM_MEMBERS)):
         with col:
             render_member_card(member, i)
@@ -755,7 +772,7 @@ def show_landing_page():
         '</div>'
     ])
     st.markdown(identity_html, unsafe_allow_html=True)
-    st.markdown('<div style="height:8px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:2px;"></div>', unsafe_allow_html=True)
     if st.button("➡️ Lanjut Login", use_container_width=True):
         st.session_state.auth_page = "login"
         st.session_state.auth_mode = "login"
