@@ -3,6 +3,129 @@ import plotly.express as px
 import plotly.graph_objects as go
 from scipy import stats
 
+# =========================
+# BRIGHT PASTEL THEME
+# =========================
+
+PASTEL_COLORS = [
+    "#38BDF8",  # sky
+    "#A78BFA",  # violet
+    "#FB7185",  # rose
+    "#2DD4BF",  # teal
+    "#FACC15",  # yellow
+    "#4ADE80",  # green
+    "#FB923C",  # orange
+    "#C084FC",  # purple
+]
+
+PASTEL_HEATMAP = [
+    "#EFF6FF",
+    "#BAE6FD",
+    "#38BDF8",
+    "#A78BFA",
+    "#FB7185",
+]
+
+PASTEL_CONTINUOUS = [
+    "#EFF6FF",
+    "#DBEAFE",
+    "#93C5FD",
+    "#A78BFA",
+    "#FB7185",
+]
+
+DASHBOARD_TEMPLATE = "plotly_white"
+
+
+def apply_pastel_theme(fig, height=520, title_size=18):
+    """Merapikan semua visualisasi agar pastel cerah, soft, dan tidak monoton."""
+    fig.update_layout(
+        template=DASHBOARD_TEMPLATE,
+        height=height,
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(255,255,255,0.92)",
+        font=dict(
+            family="Arial",
+            size=12,
+            color="#334155"
+        ),
+        title=dict(
+            text=fig.layout.title.text if fig.layout.title.text else "",
+            x=0.5,
+            xanchor="center",
+            y=0.97,
+            yanchor="top",
+            font=dict(
+                family="Arial",
+                size=title_size,
+                color="#0F172A"
+            )
+        ),
+        title_automargin=True,
+        margin=dict(
+            t=90,
+            l=55,
+            r=45,
+            b=60
+        ),
+        legend=dict(
+            bgcolor="rgba(255,255,255,0)",
+            font=dict(size=11, color="#475569")
+        )
+    )
+
+    fig.update_xaxes(
+        showgrid=True,
+        gridcolor="rgba(148,163,184,0.18)",
+        zeroline=False,
+        linecolor="rgba(148,163,184,0.35)",
+        tickfont=dict(color="#475569")
+    )
+
+    fig.update_yaxes(
+        showgrid=True,
+        gridcolor="rgba(148,163,184,0.18)",
+        zeroline=False,
+        linecolor="rgba(148,163,184,0.35)",
+        tickfont=dict(color="#475569")
+    )
+
+    return fig
+
+
+def apply_marker_style(fig, color=None):
+    """Memberi warna pastel pada chart marker/bar."""
+    chosen_color = color or PASTEL_COLORS[0]
+
+    try:
+        fig.update_traces(
+            marker=dict(
+                color=chosen_color,
+                line=dict(color="white", width=1.2)
+            ),
+            opacity=0.92
+        )
+    except Exception:
+        pass
+
+    return fig
+
+
+def apply_multi_color(fig):
+    """Memberi variasi warna pastel untuk bar/pie/area multi kategori."""
+    try:
+        fig.update_traces(
+            marker=dict(
+                color=PASTEL_COLORS,
+                line=dict(color="white", width=1.2)
+            ),
+            opacity=0.94
+        )
+    except Exception:
+        pass
+
+    return fig
+
 
 def shorten_title(text, max_len=15):
     text = str(text)
@@ -14,30 +137,7 @@ def shorten_title(text, max_len=15):
 
 
 def center_title(fig):
-    fig.update_layout(
-        title=dict(
-            text=fig.layout.title.text,
-            x=0.5,
-            xanchor="center",
-            y=0.97,
-            yanchor="top",
-            font=dict(
-                family="Arial",
-                size=18,
-                color="#2f3542"
-            )
-        ),
-        title_automargin=True,
-        margin=dict(
-            t=100,
-            l=50,
-            r=50,
-            b=50
-        )
-    )
-
-    return fig
-
+    return apply_pastel_theme(fig)
 def force_numeric(df, cols):
     temp_df = df.copy()
 
@@ -87,7 +187,8 @@ def data_type_chart(df):
         names="Data Type",
         values="Count",
         hole=0.45,
-        title="Data Type Distribution"
+        title="Data Type Distribution",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     fig.update_traces(
@@ -98,7 +199,7 @@ def data_type_chart(df):
     fig.update_layout(
         showlegend=False,
         margin=dict(t=90, b=80, l=20, r=20),
-        height=500
+        height=360
     )
 
     return center_title(fig)
@@ -129,7 +230,8 @@ def histogram(df, col):
         temp_df,
         x=col,
         title=f"Histogram ({shorten_title(col)})",
-        nbins=30
+        nbins=30,
+        color_discrete_sequence=[PASTEL_COLORS[0]]
     )
 
     return center_title(fig)
@@ -141,7 +243,8 @@ def boxplot(df, col):
     fig = px.box(
         temp_df,
         y=col,
-        title=f"Boxplot ({shorten_title(col)})"
+        title=f"Boxplot ({shorten_title(col)})",
+        color_discrete_sequence=[PASTEL_COLORS[3]]
     )
 
     return center_title(fig)
@@ -155,7 +258,8 @@ def density_plot(df, col):
         x=col,
         histnorm="density",
         marginal="rug",
-        title=f"Density Plot ({shorten_title(col)})"
+        title=f"Density Plot ({shorten_title(col)})",
+        color_discrete_sequence=[PASTEL_COLORS[1]]
     )
 
     return center_title(fig)
@@ -189,7 +293,8 @@ def qq_plot(df, col):
             x=osm,
             y=osr,
             mode="markers",
-            name="Data Points"
+            name="Data Points",
+            marker=dict(color=PASTEL_COLORS[0], size=7, line=dict(color="white", width=1))
         )
     )
 
@@ -198,7 +303,8 @@ def qq_plot(df, col):
             x=osm,
             y=osm,
             mode="lines",
-            name="Normal Line"
+            name="Normal Line",
+            line=dict(color=PASTEL_COLORS[2], width=3)
         )
     )
 
@@ -219,7 +325,8 @@ def violin_plot(df, col):
         y=col,
         box=True,
         points="all",
-        title=f"Violin Plot ({shorten_title(col)})"
+        title=f"Violin Plot ({shorten_title(col)})",
+        color_discrete_sequence=[PASTEL_COLORS[2]]
     )
 
     return center_title(fig)
@@ -237,7 +344,8 @@ def bar_chart(df, col):
         count_df,
         x=col,
         y="Count",
-        title=f"Bar Chart ({shorten_title(col)})"
+        title=f"Bar Chart ({shorten_title(col)})",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -251,7 +359,8 @@ def pie_chart(df, col):
         count_df,
         names=col,
         values="Count",
-        hole=0.35
+        hole=0.35,
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     category_count = len(count_df)
@@ -293,7 +402,7 @@ def pie_chart(df, col):
             l=30,
             r=30
         ),
-        height=620
+        height=460
     )
 
     fig.update_traces(
@@ -313,7 +422,8 @@ def count_plot(df, col):
         count_df,
         x=col,
         y="Count",
-        title=f"Count Plot ({shorten_title(col)})"
+        title=f"Count Plot ({shorten_title(col)})",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -335,7 +445,8 @@ def pareto_chart(df, col):
         go.Bar(
             x=count_df[col],
             y=count_df["Count"],
-            name="Count"
+            name="Count",
+            marker=dict(color=PASTEL_COLORS, line=dict(color="white", width=1.2))
         )
     )
 
@@ -345,7 +456,9 @@ def pareto_chart(df, col):
             y=count_df["Cumulative %"],
             name="Cumulative %",
             yaxis="y2",
-            mode="lines+markers"
+            mode="lines+markers",
+            line=dict(color=PASTEL_COLORS[2], width=3),
+            marker=dict(color=PASTEL_COLORS[1], size=8, line=dict(color="white", width=1))
         )
     )
 
@@ -389,7 +502,8 @@ def scatter_plot(df, x_col, y_col):
         temp_df,
         x=x_col,
         y=y_col,
-        title=f"Scatter ({shorten_title(x_col)} vs {shorten_title(y_col)})"
+        title=f"Scatter ({shorten_title(x_col)} vs {shorten_title(y_col)})",
+        color_discrete_sequence=[PASTEL_COLORS[0]]
     )
 
     return center_title(fig)
@@ -418,7 +532,8 @@ def regression_plot(df, x_col, y_col):
         x=x_col,
         y=y_col,
         trendline="ols",
-        title=f"Regression ({shorten_title(x_col)} vs {shorten_title(y_col)})"
+        title=f"Regression ({shorten_title(x_col)} vs {shorten_title(y_col)})",
+        color_discrete_sequence=[PASTEL_COLORS[1]]
     )
 
     return center_title(fig)
@@ -457,7 +572,7 @@ def correlation_heatmap(df, numeric_cols):
     fig = px.imshow(
         corr,
         text_auto=True,
-        color_continuous_scale="Blues",
+        color_continuous_scale=PASTEL_HEATMAP,
         title="Correlation Heatmap"
     )
 
@@ -497,7 +612,8 @@ def pair_plot(df, numeric_cols):
     fig = px.scatter_matrix(
         temp_df,
         dimensions=selected_cols,
-        title="Pair Plot"
+        title="Pair Plot",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -526,7 +642,8 @@ def bubble_chart(df, x_col, y_col, size_col):
         x=x_col,
         y=y_col,
         size=size_col,
-        title=f"Bubble ({shorten_title(x_col)}, {shorten_title(y_col)})"
+        title=f"Bubble ({shorten_title(x_col)}, {shorten_title(y_col)})",
+        color_discrete_sequence=[PASTEL_COLORS[2]]
     )
 
     return center_title(fig)
@@ -559,7 +676,8 @@ def boxplot_by_category(df, cat_col, num_col):
         numeric_df,
         x=cat_col,
         y=num_col,
-        title=f"Boxplot ({shorten_title(num_col)} by {shorten_title(cat_col)})"
+        title=f"Boxplot ({shorten_title(num_col)} by {shorten_title(cat_col)})",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -590,7 +708,8 @@ def violin_by_category(df, cat_col, num_col):
         y=num_col,
         box=True,
         points="all",
-        title=f"Violin ({shorten_title(num_col)} by {shorten_title(cat_col)})"
+        title=f"Violin ({shorten_title(num_col)} by {shorten_title(cat_col)})",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -621,7 +740,8 @@ def grouped_bar_chart(df, cat_col, num_col):
         group_df,
         x=cat_col,
         y=num_col,
-        title=f"Grouped Bar ({shorten_title(num_col)} by {shorten_title(cat_col)})"
+        title=f"Grouped Bar ({shorten_title(num_col)} by {shorten_title(cat_col)})",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -650,7 +770,8 @@ def strip_plot(df, cat_col, num_col):
         numeric_df,
         x=cat_col,
         y=num_col,
-        title=f"Strip Plot ({shorten_title(num_col)} by {shorten_title(cat_col)})"
+        title=f"Strip Plot ({shorten_title(num_col)} by {shorten_title(cat_col)})",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
@@ -693,7 +814,8 @@ def data_type_donut_chart(df):
         names="Type",
         values="Count",
         hole=0.55,
-        title="Data Type Distribution"
+        title="Data Type Distribution",
+        color_discrete_sequence=PASTEL_COLORS
     )
 
     return center_title(fig)
