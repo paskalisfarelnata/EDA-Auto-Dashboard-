@@ -154,13 +154,6 @@ def _apply_title_and_axis_safety(fig):
     return fig
 
 
-
-def _wide_plotly_config():
-    cfg = dict(PLOTLY_CONFIG) if isinstance(PLOTLY_CONFIG, dict) else {}
-    cfg["responsive"] = True
-    cfg["displaylogo"] = False
-    return cfg
-
 def apply_pastel_theme(fig, color_index=0):
     """
     Tema pastel global untuk semua chart Plotly:
@@ -467,105 +460,36 @@ def inject_visual_text_readability_css():
             section.main button * {
                 opacity: 1 !important;
             }
-        
-            /* =====================================================
-               VISUALIZATION FULL WIDTH FINAL
-               Menghilangkan ruang kosong kiri-kanan pada semua halaman
-               visualisasi agar konten melebar rapi mengikuti layar.
-               ===================================================== */
 
-            .main .block-container,
-            section.main .block-container,
-            div[data-testid="stMainBlockContainer"],
-            div[data-testid="stAppViewContainer"] .block-container {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-                padding-top: 0.8rem !important;
-                padding-bottom: 1rem !important;
-                box-sizing: border-box !important;
+            /* FINAL DARK PERMANENT FORM/TABLE/CHART READABILITY */
+            div[data-testid="stSelectbox"] *,
+            div[data-baseweb="select"] *,
+            div[data-testid="stSlider"] *,
+            div[data-testid="stButton"] > button,
+            div[data-testid="stButton"] > button * {
+                color: #FFFFFF !important;
+                opacity: 1 !important;
             }
-
-            section.main div[data-testid="stVerticalBlock"],
-            section.main div[data-testid="stVerticalBlock"] > div {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
+            div[data-testid="stDataFrame"],
+            div[data-testid="stTable"] {
+                background: #0F172A !important;
+                border: 1px solid rgba(103, 232, 249, .22) !important;
+                border-radius: 16px !important;
+                overflow: hidden !important;
             }
-
-            section.main div[data-testid="stHorizontalBlock"] {
-                width: 100% !important;
-                max-width: 100% !important;
-                gap: 1rem !important;
-                box-sizing: border-box !important;
-                align-items: stretch !important;
+            .stPlotlyChart,
+            .js-plotly-plot,
+            .plot-container {
+                background: transparent !important;
             }
-
-            section.main div[data-testid="column"] {
-                width: 100% !important;
-                min-width: 0 !important;
-                box-sizing: border-box !important;
+            div[data-testid="stAlert"] *,
+            div[data-testid="stInfo"] *,
+            div[data-testid="stWarning"] *,
+            div[data-testid="stSuccess"] * {
+                color: #F8FAFC !important;
+                opacity: 1 !important;
             }
-
-            /* Header/judul halaman visualisasi dibuat full dan tidak terpusat sempit */
-            section.main .section-title,
-            section.main .section-title *,
-            section.main .subsection-title,
-            section.main .subsection-title * {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            /* Selectbox dan uploader area dibuat mengikuti lebar halaman */
-            section.main div[data-testid="stSelectbox"],
-            section.main div[data-testid="stSelectbox"] > div,
-            section.main div[data-baseweb="select"],
-            section.main div[data-testid="stFileUploader"],
-            section.main div[data-testid="stFileUploader"] > div {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            /* Plotly chart memenuhi area kolomnya */
-            section.main div[data-testid="stPlotlyChart"],
-            section.main div[data-testid="stPlotlyChart"] > div,
-            section.main div[data-testid="stPlotlyChart"] .js-plotly-plot,
-            section.main div[data-testid="stPlotlyChart"] .plot-container,
-            section.main div[data-testid="stPlotlyChart"] .svg-container {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            /* Card interpretasi dan ringkasan visual memenuhi lebar */
-            section.main .interpretation-box,
-            section.main .interpretation-card,
-            section.main .insight-box,
-            section.main .summary-box,
-            section.main .analysis-box,
-            section.main .interpretasi-box {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-
-            /* Jarak antar elemen dibuat lebih padat dan rapi */
-            section.main div[data-testid="stButton"] {
-                margin-top: 0.35rem !important;
-                margin-bottom: 0.45rem !important;
-            }
-
-            section.main hr {
-                margin-top: 0.65rem !important;
-                margin-bottom: 0.65rem !important;
-            }
-
-</style>
+        </style>
         """,
         unsafe_allow_html=True
     )
