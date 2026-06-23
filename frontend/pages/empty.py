@@ -3,9 +3,7 @@ import streamlit as st
 
 def show_empty_dashboard_page():
     # =====================================================
-    # EMPTY DASHBOARD STATE
-    # Tampilan awal ketika dataset belum diupload.
-    # Dibuat lebih rapi, modern, dan tetap ringan.
+    # EMPTY DASHBOARD STATE - DARK PERMANENT THEME
     # =====================================================
 
     st.markdown(
@@ -15,6 +13,7 @@ def show_empty_dashboard_page():
                 max-width: 1150px;
                 margin: 0 auto;
                 padding-top: 2px;
+                color: #e2e8f0 !important;
             }
 
             .empty-hero {
@@ -23,15 +22,15 @@ def show_empty_dashboard_page():
                 background:
                     radial-gradient(circle at 8% 10%, rgba(36, 209, 239, 0.30), transparent 35%),
                     radial-gradient(circle at 92% 0%, rgba(109, 40, 217, 0.28), transparent 35%),
-                    linear-gradient(135deg, #0f172a 0%, #1d4ed8 48%, #6d28d9 100%);
-                color: white;
+                    linear-gradient(135deg, #020617 0%, #1d4ed8 48%, #6d28d9 100%);
+                color: #ffffff !important;
                 padding: 26px 28px;
                 border-radius: 28px;
                 box-shadow:
-                    0 24px 58px rgba(37, 99, 235, 0.28),
-                    0 10px 24px rgba(15, 23, 42, 0.14);
+                    0 24px 58px rgba(37, 99, 235, 0.24),
+                    0 10px 30px rgba(0, 0, 0, 0.42);
                 margin-bottom: 16px;
-                border: 1px solid rgba(255,255,255,0.18);
+                border: 1px solid rgba(125, 211, 252, 0.24);
             }
 
             .empty-hero::before {
@@ -41,7 +40,7 @@ def show_empty_dashboard_page():
                 background: linear-gradient(
                     90deg,
                     transparent,
-                    rgba(255,255,255,0.18),
+                    rgba(255,255,255,0.16),
                     transparent
                 );
                 transform: translateX(-100%);
@@ -70,11 +69,12 @@ def show_empty_dashboard_page():
                 line-height: 1.1;
                 margin-bottom: 8px;
                 letter-spacing: -0.4px;
+                color: #ffffff !important;
             }
 
             .empty-subtitle {
                 font-size: 14px;
-                color: #dbeafe;
+                color: #dbeafe !important;
                 line-height: 1.6;
                 font-weight: 600;
                 max-width: 680px;
@@ -82,19 +82,19 @@ def show_empty_dashboard_page():
 
             .empty-status-pill {
                 min-width: 210px;
-                background: rgba(255,255,255,0.14);
-                border: 1px solid rgba(255,255,255,0.24);
+                background: rgba(255,255,255,0.10);
+                border: 1px solid rgba(125,211,252,0.28);
                 border-radius: 20px;
                 padding: 16px 18px;
                 text-align: center;
-                box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+                box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
                 backdrop-filter: blur(14px);
             }
 
             .empty-pill-label {
                 font-size: 11px;
                 font-weight: 800;
-                color: #bfdbfe;
+                color: #bfdbfe !important;
                 text-transform: uppercase;
                 letter-spacing: 1.2px;
                 margin-bottom: 4px;
@@ -103,36 +103,42 @@ def show_empty_dashboard_page():
             .empty-pill-value {
                 font-size: 22px;
                 font-weight: 950;
-                color: #ffffff;
+                color: #ffffff !important;
             }
 
             .empty-alert {
-                background: linear-gradient(135deg, #eff6ff, #eef2ff);
-                color: #1e3a8a;
-                border: 1px solid rgba(37, 99, 235, 0.16);
-                border-left: 6px solid #2563eb;
+                background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(30,41,59,0.92));
+                color: #e2e8f0 !important;
+                border: 1px solid rgba(96,165,250,0.28);
+                border-left: 6px solid #38bdf8;
                 padding: 14px 16px;
                 border-radius: 18px;
                 font-size: 14px;
                 font-weight: 800;
                 margin-bottom: 14px;
-                box-shadow: 0 8px 20px rgba(37,99,235,0.08);
+                box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+            }
+
+            .empty-alert b {
+                color: #93c5fd !important;
             }
 
             .empty-kpi {
-                background: rgba(255,255,255,0.94);
-                border: 1px solid rgba(37, 99, 235, 0.13);
+                background: rgba(15,23,42,0.92);
+                border: 1px solid rgba(96,165,250,0.22);
                 border-radius: 22px;
                 padding: 18px 18px;
                 min-height: 135px;
-                box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+                box-shadow: 0 14px 32px rgba(0,0,0,0.34);
                 transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             }
 
             .empty-kpi:hover {
                 transform: translateY(-5px);
-                border-color: rgba(37, 99, 235, 0.30);
-                box-shadow: 0 16px 36px rgba(37,99,235,0.16);
+                border-color: rgba(56,189,248,0.42);
+                box-shadow:
+                    0 18px 42px rgba(0,0,0,0.42),
+                    0 0 28px rgba(56,189,248,0.10);
             }
 
             .empty-kpi-icon {
@@ -142,7 +148,7 @@ def show_empty_dashboard_page():
 
             .empty-kpi-label {
                 font-size: 12px;
-                color: #64748b;
+                color: #cbd5e1 !important;
                 font-weight: 850;
                 text-transform: uppercase;
                 letter-spacing: 0.7px;
@@ -150,7 +156,7 @@ def show_empty_dashboard_page():
 
             .empty-kpi-value {
                 font-size: 24px;
-                color: #0f172a;
+                color: #f8fafc !important;
                 font-weight: 950;
                 margin-top: 4px;
                 line-height: 1.15;
@@ -159,29 +165,29 @@ def show_empty_dashboard_page():
             .empty-section-title {
                 font-size: 15px;
                 font-weight: 950;
-                color: #0f172a;
+                color: #f8fafc !important;
                 margin: 16px 0 10px 0;
             }
 
             .empty-feature-card {
-                background: rgba(255,255,255,0.94);
-                border: 1px solid rgba(37,99,235,0.12);
+                background: rgba(15,23,42,0.92);
+                border: 1px solid rgba(96,165,250,0.22);
                 border-radius: 20px;
                 padding: 16px 17px;
                 min-height: 165px;
-                box-shadow: 0 10px 26px rgba(15,23,42,0.08);
+                box-shadow: 0 14px 32px rgba(0,0,0,0.34);
             }
 
             .empty-feature-title {
                 font-size: 14px;
                 font-weight: 950;
-                color: #1e3a8a;
+                color: #93c5fd !important;
                 margin-bottom: 8px;
             }
 
             .empty-feature-text {
                 font-size: 13px;
-                color: #334155;
+                color: #e2e8f0 !important;
                 line-height: 1.65;
                 font-weight: 600;
             }
@@ -198,55 +204,36 @@ def show_empty_dashboard_page():
                 height: 26px;
                 width: 26px;
                 border-radius: 999px;
-                background: linear-gradient(135deg, #1d4ed8, #6d28d9);
-                color: white;
+                background: linear-gradient(135deg, #2563eb, #7c3aed);
+                color: white !important;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 font-size: 12px;
                 font-weight: 950;
-                box-shadow: 0 6px 14px rgba(37,99,235,0.20);
+                box-shadow: 0 6px 16px rgba(37,99,235,0.32);
             }
 
             .empty-step-text {
                 font-size: 13px;
-                color: #334155;
+                color: #e2e8f0 !important;
                 font-weight: 650;
                 line-height: 1.45;
             }
 
+            .empty-step-text b {
+                color: #93c5fd !important;
+            }
+
             .empty-footer-note {
                 margin-top: 12px;
-                background: linear-gradient(135deg, #ecfeff, #eff6ff);
-                border: 1px solid rgba(14, 165, 233, 0.20);
-                color: #0f3a68;
+                background: linear-gradient(135deg, rgba(8,47,73,0.46), rgba(15,23,42,0.92));
+                border: 1px solid rgba(14,165,233,0.26);
+                color: #dbeafe !important;
                 border-radius: 18px;
                 padding: 12px 14px;
                 font-size: 13px;
                 font-weight: 750;
-            }
-
-            @media (prefers-color-scheme: dark) {
-                .empty-alert,
-                .empty-kpi,
-                .empty-feature-card,
-                .empty-footer-note {
-                    background: rgba(15,23,42,0.92);
-                    border-color: rgba(96,165,250,0.25);
-                    color: #cbd5e1;
-                }
-
-                .empty-section-title,
-                .empty-kpi-value,
-                .empty-feature-title {
-                    color: #93c5fd;
-                }
-
-                .empty-feature-text,
-                .empty-step-text,
-                .empty-kpi-label {
-                    color: #cbd5e1;
-                }
             }
 
             @media (max-width: 900px) {
@@ -435,4 +422,3 @@ def show_empty_dashboard_page():
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.stop()
-
